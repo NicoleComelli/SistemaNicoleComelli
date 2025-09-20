@@ -4,11 +4,7 @@
  */
 package view;
 
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+import tools.Util;
 
 /**
  *
@@ -16,38 +12,18 @@ import javax.swing.text.MaskFormatter;
  */
 public class JDlgUsuariosNcc extends javax.swing.JDialog {
 
-    /**
-     * Creates new form JDlgUsuarios
-     */
-    boolean incluir = false;
-    private MaskFormatter mascaraCpf, mascaraDataNasc;
-
     public JDlgUsuariosNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        //desabilitar();
-        try {
-            mascaraCpf = new MaskFormatter("###.###.###-##");
-            mascaraDataNasc = new MaskFormatter("##/##/####");
-            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCpf));
-            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNasc));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgUsuariosNcc.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+                jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+                jBtnPesquisar);
     }
 
-    public void limpar() {
-        jTxtCodigo.setText("");
-        jTxtNome.setText("");
-        jTxtApelido.setText("");
-        jFmtCpf.setText("");
-        jFmtDataNascimento.setText("");
-        jPwdSenha.setText("");
-        jCboNivel.setSelectedIndex(-1);
-        jChbAtivo.setSelected(false);
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -252,29 +228,41 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        // TODO add your handling code here:
-        limpar();
-        incluir = true;
-        jTxtCodigo.grabFocus();
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, 
+                jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+                jBtnPesquisar);
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf, 
+                jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+                jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+                jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        // TODO add your handling code here:
-        incluir = false;
-        jTxtNome.grabFocus();
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, 
+                jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, 
+                jChbAtivo,jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+                jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+                jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        
-
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

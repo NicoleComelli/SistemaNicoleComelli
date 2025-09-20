@@ -5,41 +5,25 @@
  */
 package view;
 
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+import tools.Util;
+
 /**
  *
  * @author u03808019140
  */
 public class JDlgVendedorNcc extends javax.swing.JDialog {
 
-    boolean incluir = false;
-    private MaskFormatter mascaraCpf, mascaraDataNascimento, mascaraTelefone;
-    /**
-     * Creates new form JDlgVendedorNcc
-     */
     public JDlgVendedorNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastrar vendedor");
         setLocationRelativeTo(null);
-        try {
-            mascaraCpf = new MaskFormatter("###.###.###-##");
-            mascaraDataNascimento = new MaskFormatter("##/##/####");
-            mascaraTelefone = new MaskFormatter("(##) #####-####");
-
-            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(mascaraCpf));
-            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(mascaraDataNascimento));
-            jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(mascaraTelefone));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+                jBtnPesquisar);
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -234,30 +218,46 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-        
+
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
+                jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        incluir = true;
-        jTxtCodigo.grabFocus();
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,
+                jBtnPesquisar);
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        // TODO add your handling code here:
-        incluir = false;
-        jTxtNome.grabFocus();
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,
+                jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
+                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
+                jBtnConfirmar, jBtnCancelar);
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
+                jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     /**

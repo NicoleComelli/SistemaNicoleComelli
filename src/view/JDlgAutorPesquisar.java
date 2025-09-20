@@ -11,9 +11,6 @@ package view;
  */
 public class JDlgAutorPesquisar extends javax.swing.JDialog {
 
-    ControllerAutorNcc controllerAutorNcc;
-    JDlgAutorNcc jDlgAutorNcc;
-
     /**
      * Creates new form JDlgArtistaPesquisar
      */
@@ -25,9 +22,6 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
         
     }
 
-    public void setJDlgAutorNcc(JDlgAutorNcc jDlgAutorNcc) {
-        this.jDlgAutorNcc = jDlgAutorNcc;
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

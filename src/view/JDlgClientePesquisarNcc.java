@@ -11,8 +11,6 @@ package view;
  */
 public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
 
-    ControllerClienteNcc controllerClienteNcc;
-    JDlgClienteNcc jDlgClienteNcc;
     /**
      * Creates new form JDlgClientePesquisar
      */

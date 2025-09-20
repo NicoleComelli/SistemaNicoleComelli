@@ -10,8 +10,6 @@ package view;
  */
 public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
 
-    ControllerLivroNcc controllerLivroNcc;
-    JDlgLivroNcc jDlgLivroNcc;
     /**
      * Creates new form JDlgLivroPesquisar
      */

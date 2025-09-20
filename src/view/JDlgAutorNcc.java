@@ -11,9 +11,6 @@ import tools.Util;
  */
 public class JDlgAutorNcc extends javax.swing.JDialog {
 
-    boolean incluir = false;
-
-
     /**
      * Creates new form JDlgAutor
      */
@@ -70,7 +67,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
 
         jLabel6.setText("Pseudonimo");
 
-        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/add.png"))); // NOI18N
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +75,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/editar.png"))); // NOI18N
+        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
         jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,7 +83,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/excluir.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +91,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/confirmar.png"))); // NOI18N
+        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
         jBtnConfirmar.setText("Confirmar");
         jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +99,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/cancelar.png"))); // NOI18N
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +107,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/pesquisa1.png"))); // NOI18N
+        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisa1.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
         jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,7 +203,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jFmtDataDeObito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
                     .addComponent(jBtnAlterar)
@@ -221,24 +218,38 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade, jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+                jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        incluir = false;
-        jTxtNome.grabFocus();
+Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+                jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+ Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        
+        Util.limpar(jTxtCodigo, jTxtNome, jTxtNacionalidade, 
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+                jFmtDataDeObito);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-      
+      Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+                jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+       Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+                jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+       Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+    
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

@@ -5,16 +5,11 @@
  */
 package view;
 
-import java.util.List;
-
 /**
  *
  * @author u03808019140
  */
 public class JDlgUsuariosPesquisarNcc extends javax.swing.JDialog {
-
-    ControllerUsuarioNcc controllerUsuarioNcc;
-    JDlgUsuariosNcc jDlgUsuarioNcc;
 
     /**
      * Creates new form JDlgUsuariosPesquisar

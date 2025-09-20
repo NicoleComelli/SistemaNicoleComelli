@@ -4,20 +4,13 @@
  */
 package view;
 
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
+import tools.Util;
 
 /**
  *
  * @author u03808019140
  */
 public class JDlgLivroNcc extends javax.swing.JDialog {
-
-    boolean incluir = false;
-    private MaskFormatter mascaraDataCadas, mascaraDataPubli;
 
     /**
      * Creates new form JDlgLivro
@@ -27,17 +20,12 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastrar livro");
         setLocationRelativeTo(null);
-        try {
-            mascaraDataCadas = new MaskFormatter("##/##/####");
-            mascaraDataPubli = new MaskFormatter("##/##/####");
-            jFmtDataDeCadastro.setFormatterFactory(new DefaultFormatterFactory(mascaraDataCadas));
-            jFmtDataDePublicacao.setFormatterFactory(new DefaultFormatterFactory(mascaraDataPubli));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgLivroNcc.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+        Util.habilitar(false, jTxtAutor, jTxtCodigo, jTxtEdicao,
+                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -85,7 +73,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
 
         jLabel11.setText("Autor");
 
-        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/add.png"))); // NOI18N
+        jBtnIncluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/add.png"))); // NOI18N
         jBtnIncluir.setText("Incluir");
         jBtnIncluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +81,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/editar.png"))); // NOI18N
+        jBtnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/editar.png"))); // NOI18N
         jBtnAlterar.setText("Alterar");
         jBtnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +89,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/excluir.png"))); // NOI18N
+        jBtnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excluir.png"))); // NOI18N
         jBtnExcluir.setText("Excluir");
         jBtnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +97,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/confirmar.png"))); // NOI18N
+        jBtnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
         jBtnConfirmar.setText("Confirmar");
         jBtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,7 +105,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/cancelar.png"))); // NOI18N
+        jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +113,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/pesquisa1.png"))); // NOI18N
+        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisa1.png"))); // NOI18N
         jBtnPesquisar.setText("Pesquisar");
         jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +175,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                                 .addComponent(jLabel1)
                                 .addGap(132, 132, 132)
                                 .addComponent(jLabel2)))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -231,25 +219,40 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        incluir = true;
-        jTxtCodigo.grabFocus();
+        Util.habilitar(true, jTxtAutor, jTxtCodigo, jTxtEdicao,
+                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        incluir = false;
-        jTxtTitulo.grabFocus();
+        Util.habilitar(true, jTxtAutor, jTxtCodigo, jTxtEdicao,
+                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        
+        Util.limpar(jTxtAutor, jTxtCodigo, jTxtEdicao,
+                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                jFmtDataDePublicacao);
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        
+        Util.habilitar(false, jTxtAutor, jTxtCodigo, jTxtEdicao,
+                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-    }//GEN-LAST:event_jBtnCancelarActionPerformed
+        Util.habilitar(false, jTxtAutor, jTxtCodigo, jTxtEdicao,
+                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
 
