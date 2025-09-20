@@ -85,7 +85,7 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-
+        System.exit(0);
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**
