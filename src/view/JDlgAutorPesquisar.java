@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 package view;
-
 /**
  *
  * @author u03808019140
  */
 public class JDlgAutorPesquisar extends javax.swing.JDialog {
+
+    JDlgAutorNcc jDlgAutorNcc;
 
     /**
      * Creates new form JDlgArtistaPesquisar
@@ -20,6 +21,9 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
         setTitle("Pesquisar autor");
         setLocationRelativeTo(null);
         
+    }
+    public void setTelaAnterior(JDlgAutorNcc jDlgAutorNcc) {
+        this.jDlgAutorNcc = jDlgAutorNcc;
     }
 
 
@@ -138,4 +142,6 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTblPesquisar;
     // End of variables declaration//GEN-END:variables
+
+    
 }

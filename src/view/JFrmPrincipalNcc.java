@@ -39,17 +39,18 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         jMnuUsuario = new javax.swing.JMenuItem();
         jMnuVendedor = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMnuVendas = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/salvar.png"))); // NOI18N
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar.png"))); // NOI18N
         jMenu1.setMnemonic('d');
         jMenu1.setText("Cadastrar");
 
-        jMnuArtista.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMnuArtista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/imagem.png"))); // NOI18N
+        jMnuArtista.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuArtista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addConta.png"))); // NOI18N
         jMnuArtista.setMnemonic('a');
         jMnuArtista.setText("Artista");
         jMnuArtista.addActionListener(new java.awt.event.ActionListener() {
@@ -59,8 +60,8 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         });
         jMenu1.add(jMnuArtista);
 
-        jMnuCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMnuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/addConta.png"))); // NOI18N
+        jMnuCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addConta.png"))); // NOI18N
         jMnuCliente.setMnemonic('c');
         jMnuCliente.setText("Cliente");
         jMnuCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -70,8 +71,8 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         });
         jMenu1.add(jMnuCliente);
 
-        jMnuLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMnuLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/nota.png"))); // NOI18N
+        jMnuLivro.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuLivro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nota.png"))); // NOI18N
         jMnuLivro.setMnemonic('l');
         jMnuLivro.setText("Livro");
         jMnuLivro.addActionListener(new java.awt.event.ActionListener() {
@@ -81,8 +82,8 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         });
         jMenu1.add(jMnuLivro);
 
-        jMnuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/usuario1.png"))); // NOI18N
+        jMnuUsuario.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario1.png"))); // NOI18N
         jMnuUsuario.setMnemonic('u');
         jMnuUsuario.setText("Usuario");
         jMnuUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -92,8 +93,8 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         });
         jMenu1.add(jMnuUsuario);
 
-        jMnuVendedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMnuVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/contas1.png"))); // NOI18N
+        jMnuVendedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuVendedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/contas1.png"))); // NOI18N
         jMnuVendedor.setMnemonic('v');
         jMnuVendedor.setText("Vendedor");
         jMnuVendedor.addActionListener(new java.awt.event.ActionListener() {
@@ -105,9 +106,21 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons-sem-senha/icons/dados2.png"))); // NOI18N
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dados2.png"))); // NOI18N
         jMenu2.setMnemonic('m');
         jMenu2.setText("Movimento");
+
+        jMnuVendas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrinho.png"))); // NOI18N
+        jMnuVendas.setMnemonic('v');
+        jMnuVendas.setText("Vendas");
+        jMnuVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuVendasActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMnuVendas);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -150,6 +163,11 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         JDlgVendedorNcc jDlgVendedorNcc = new JDlgVendedorNcc(null, true);
         jDlgVendedorNcc.setVisible(true);
     }//GEN-LAST:event_jMnuVendedorActionPerformed
+
+    private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
+        JDlgVendasNcc jDlgVendasNcc = new JDlgVendasNcc(null, true);
+        jDlgVendasNcc.setVisible(true);
+    }//GEN-LAST:event_jMnuVendasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +214,7 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuCliente;
     private javax.swing.JMenuItem jMnuLivro;
     private javax.swing.JMenuItem jMnuUsuario;
+    private javax.swing.JMenuItem jMnuVendas;
     private javax.swing.JMenuItem jMnuVendedor;
     // End of variables declaration//GEN-END:variables
 }

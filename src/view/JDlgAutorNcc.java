@@ -253,8 +253,9 @@ Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade,
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-
-
+        JDlgAutorPesquisar jDlgAutorPesquisar = new JDlgAutorPesquisar(null, true);
+        jDlgAutorPesquisar.setTelaAnterior(this);
+        jDlgAutorPesquisar.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     /**

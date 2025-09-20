@@ -223,7 +223,9 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-
+        JDlgVendedorPesquisarNcc jDlgVendedorPesquisarNcc = new JDlgVendedorPesquisarNcc(null, true);
+        jDlgVendedorPesquisarNcc.setTelaAnterior(this);
+        jDlgVendedorPesquisarNcc.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

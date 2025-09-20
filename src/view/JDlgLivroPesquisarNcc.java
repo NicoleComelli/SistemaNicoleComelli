@@ -10,6 +10,7 @@ package view;
  */
 public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
 
+    JDlgLivroNcc jDlgLivroNcc;
     /**
      * Creates new form JDlgLivroPesquisar
      */
@@ -19,6 +20,10 @@ public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
         setTitle("Pesquisar livro");
         setLocationRelativeTo(null);
         
+    }
+    
+    public void setTelaAnterior(JDlgLivroNcc jDlgLivroNcc) {
+        this.jDlgLivroNcc = jDlgLivroNcc;
     }
     
     /**

@@ -19,6 +19,7 @@ public class JDlgClienteNcc extends javax.swing.JDialog {
     public JDlgClienteNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtIdade, jTxtEmail,
                 jFmtCPF, jFmtRG, jFmtTelefone, jFmtDataNascimento,
                 jFmtDataCadastro, jTxtTotalGasto, jFmtCEP, jTxtRua, jTxtOcupacao,
@@ -392,7 +393,9 @@ public class JDlgClienteNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
-
+        JDlgClientePesquisarNcc jDlgClientePesquisarNcc = new JDlgClientePesquisarNcc(null, true);
+        jDlgClientePesquisarNcc.setTelaAnterior(this);
+        jDlgClientePesquisarNcc.setVisible(true);
     }//GEN-LAST:event_jBtnPesquisarActionPerformed
 
     private void jFmtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFmtTelefoneActionPerformed

@@ -11,6 +11,7 @@ package view;
  */
 public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
 
+    JDlgClienteNcc jDlgClienteNcc;
     /**
      * Creates new form JDlgClientePesquisar
      */
@@ -20,6 +21,9 @@ public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
         setTitle("Pesquisar usuarios");
         setLocationRelativeTo(null);
         
+    }
+    public void setTelaAnterior(JDlgClienteNcc jDlgClienteNcc) {
+        this.jDlgClienteNcc = jDlgClienteNcc;
     }
 
     /**

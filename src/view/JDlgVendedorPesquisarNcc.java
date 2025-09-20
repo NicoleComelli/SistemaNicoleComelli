@@ -11,6 +11,7 @@ package view;
  */
 public class JDlgVendedorPesquisarNcc extends javax.swing.JDialog {
 
+    JDlgVendedorNcc jDlgVendedorNcc;
     /**
      * Creates new form JDlgVendedorPesquisar
      */
@@ -21,6 +22,10 @@ public class JDlgVendedorPesquisarNcc extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         
     }
+    public void setTelaAnterior(JDlgVendedorNcc jDlgVendedorNcc) {
+        this.jDlgVendedorNcc = jDlgVendedorNcc;
+    }
+    
 
 
     /**
