@@ -43,9 +43,13 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_nicole_comelli?zeroDateTimeBehavior=convertToNull</property>
+<!--    <property name="hibernate.connection.url">jdbc:mysql://10.7.0.51:33062/db_nicole_comelli?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">nicole_comelli</property>
-    <property name="hibernate.connection.password">nicole_comelli</property>
+    <property name="hibernate.connection.password">nicole_comelli</property>-->
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_nicole_comelli?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Nicky@201020</property>
     <mapping class="bean.LivroNcc"/>
     <mapping class="bean.VendedorNcc"/>
     <mapping class="bean.AutorNcc"/>

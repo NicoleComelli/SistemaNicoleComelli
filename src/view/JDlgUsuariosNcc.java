@@ -4,6 +4,13 @@
  */
 package view;
 
+import bean.UsuariosNcc;
+import dao.UsuariosDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -12,18 +19,66 @@ import tools.Util;
  */
 public class JDlgUsuariosNcc extends javax.swing.JDialog {
 
+    UsuariosNcc usuariosNcc;
+    boolean incluir;
+
+    private MaskFormatter cpf, data;
+
     public JDlgUsuariosNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
+        try {
+            data = new MaskFormatter("##/##/####");
+            cpf = new MaskFormatter("###.###.###-##");
+
+            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(data));
+            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(cpf));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgUsuariosNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
+    public UsuariosNcc viewBean() {
+        UsuariosNcc usuariosNcc = new UsuariosNcc();
+        usuariosNcc.setIdUsuariosNcc(Util.strToInt(jTxtCodigo.getText()));
+        usuariosNcc.setNomeNcc(jTxtNome.getText());
+        usuariosNcc.setApelidoNcc(jTxtApelido.getText());
+        usuariosNcc.setCpfNcc(jFmtCpf.getText());
+        usuariosNcc.setDataNascimentoNcc(Util.strToDate(jFmtDataNascimento.getText()));
+        usuariosNcc.setSenhaNcc(jPwdSenha.getText());
+        usuariosNcc.setNivelNcc(jCboNivel.getSelectedIndex());
+        if (jChbAtivo.isSelected() == true) {
+            usuariosNcc.setAtivoNcc("S");
+        } else {
+            usuariosNcc.setAtivoNcc("N");
+        }
+        return usuariosNcc;
+    }
+
+    public void beanView(UsuariosNcc usuariosNcc) {
+        this.usuariosNcc = usuariosNcc;
+        jTxtCodigo.setText(Util.intToStr(usuariosNcc.getIdUsuariosNcc()));
+        jTxtNome.setText(usuariosNcc.getNomeNcc());
+        jTxtApelido.setText(usuariosNcc.getApelidoNcc());
+        jFmtCpf.setText(usuariosNcc.getCpfNcc());
+        jFmtDataNascimento.setText(Util.dateToStr(usuariosNcc.getDataNascimentoNcc()));
+        jPwdSenha.setText(usuariosNcc.getSenhaNcc());
+        jCboNivel.setSelectedIndex(usuariosNcc.getNivelNcc());
+        if (usuariosNcc.getAtivoNcc().equals("S") == true) {
+            jChbAtivo.setSelected(true);
+        } else {
+            jChbAtivo.setSelected(false);
+        }
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +93,6 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
         jBtnAlterar = new javax.swing.JButton();
         jBtnConfirmar = new javax.swing.JButton();
         jBtnExcluir = new javax.swing.JButton();
-        jBtnPesquisar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jTxtCodigo = new javax.swing.JTextField();
@@ -55,6 +109,7 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPwdSenha = new javax.swing.JPasswordField();
+        jBtnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,14 +145,6 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
             }
         });
 
-        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisa1.png"))); // NOI18N
-        jBtnPesquisar.setText("Pesquisar");
-        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnPesquisarActionPerformed(evt);
-            }
-        });
-
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
         jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +170,14 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
         jLabel5.setText("Data de Nascimento");
 
         jLabel6.setText("Senha");
+
+        jBtnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pesquisa1.png"))); // NOI18N
+        jBtnPesquisar.setText("Pesquisar");
+        jBtnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,41 +283,69 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, 
+        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
-        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf, 
+        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
                 jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
+        incluir = true;
+        jTxtCodigo.grabFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+        UsuariosNcc usuariosNcc = viewBean();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        if (this.incluir == true) {
+            usuariosDAO.insert(usuariosNcc);
+        } else {
+            usuariosDAO.update(usuariosNcc);
+        }
+
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido, 
-                jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, 
-                jChbAtivo,jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,jBtnPesquisar);
+        if (this.usuariosNcc == null) {
+            Util.msg("É necessário fazer uma consulta antes de alterar");
+        } else {
+
+            Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
+                    jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel,
+                    jChbAtivo, jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
+            incluir = false;
+            jTxtCodigo.grabFocus();
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo,
                 jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-                jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
+        if (this.usuariosNcc == null) {
+            Util.msg("É necessário fazer uma consulta antes de alterar");
+        } else {
+        if (Util.perguntar("Deseja excluir ?") == true) {
+            UsuariosDAO usuariosDAO = new UsuariosDAO();
+            usuariosDAO.delete(viewBean());
+            Util.msg("Exclusão feita com sucesso");
+            Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                    jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
+        } else {
+            Util.msg("Exclusão cancelada");
+        }
+
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

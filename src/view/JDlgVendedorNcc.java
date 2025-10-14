@@ -5,6 +5,13 @@
  */
 package view;
 
+import bean.VendedorNcc;
+import dao.VendedorDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -13,16 +20,61 @@ import tools.Util;
  */
 public class JDlgVendedorNcc extends javax.swing.JDialog {
 
+    boolean incluir;
+
+    private MaskFormatter cpf, dataNascimento, telefone;
+    private VendedorNcc vendedorNcc;
+
     public JDlgVendedorNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setTitle("Cadastrar vendedor");
         setLocationRelativeTo(null);
-        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido, 
+        Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
                 jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir, 
+        Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
+        try {
+            dataNascimento = new MaskFormatter("##/##/####");
+            cpf = new MaskFormatter("###.###.###-##");
+            telefone = new MaskFormatter("(##) #####-####");
+
+            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(cpf));
+            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(dataNascimento));
+            jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(telefone));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public VendedorNcc viewBean() {
+        VendedorNcc vendedorNcc = new VendedorNcc();
+        vendedorNcc.setIdVendedorNcc(Util.strToInt(jTxtCodigo.getText()));
+        vendedorNcc.setNomeNcc(jTxtNome.getText());
+        vendedorNcc.setApelidoNcc(jTxtApelido.getText());
+        vendedorNcc.setEmailNcc(jTxtEmail.getText());
+        vendedorNcc.setCpfNcc(jFmtCpf.getText());
+        vendedorNcc.setDataNascimentoNcc(Util.strToDate(jFmtDataNascimento.getText()));
+        vendedorNcc.setTelefoneNcc(jFmtTelefone.getText());
+        return vendedorNcc;
+
+    }
+
+    /**
+     *
+     * @param vendedorNcc
+     */
+    public void beanView(VendedorNcc vendedorNcc) {
+        this.vendedorNcc = vendedorNcc;
+        jTxtCodigo.setText(Util.intToStr(vendedorNcc.getIdVendedorNcc()));
+        jTxtNome.setText(vendedorNcc.getNomeNcc());
+        jTxtApelido.setText(vendedorNcc.getApelidoNcc());
+        jTxtEmail.setText(vendedorNcc.getEmailNcc());
+        jFmtCpf.setText(vendedorNcc.getCpfNcc());
+        jFmtDataNascimento.setText(Util.dateToStr(vendedorNcc.getDataNascimentoNcc()));
+        jFmtTelefone.setText(vendedorNcc.getTelefoneNcc());
+
     }
 
     /**
@@ -218,8 +270,19 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,
-                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone);
+        if (this.vendedorNcc == null) {
+            Util.msg("É necessário fazer uma consulta antes de alterar");
+        }
+        if (Util.perguntar("Deseja excluir?") == true) {
+            VendedorDAO vendedorDAO = new VendedorDAO();
+            vendedorDAO.delete(viewBean());
+            Util.msg("Exclusão feita com sucesso");
+            Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,
+                    jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone);
+        } else {
+            Util.msg("Excluaão cancelada");
+        }
+
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
@@ -244,17 +307,31 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
                 jBtnPesquisar);
         Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone);
+        this.incluir = true;
+        jTxtCodigo.grabFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
-                jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
-                jBtnConfirmar, jBtnCancelar);
-        Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,
-                jBtnPesquisar);
+        if (this.vendedorNcc == null) {
+            Util.msg("É necessário fazer uma consulta antes de alterar");
+        } else {
+            Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
+                    jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
+                    jBtnConfirmar, jBtnCancelar);
+            Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,
+                    jBtnPesquisar);
+            this.incluir = false;
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+        VendedorDAO vendedorDAO = new VendedorDAO();
+        VendedorNcc vendedorNcc = viewBean();
+        if (this.incluir == true) {
+            vendedorDAO.insert(vendedorNcc);
+        } else {
+            vendedorDAO.update(vendedorNcc);
+        }
         Util.habilitar(false, jTxtNome, jTxtCodigo, jTxtApelido,
                 jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone,
                 jBtnConfirmar, jBtnCancelar);

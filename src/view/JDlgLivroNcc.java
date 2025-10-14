@@ -4,6 +4,15 @@
  */
 package view;
 
+import bean.ClienteNcc;
+import bean.LivroNcc;
+import dao.ClienteDAO;
+import dao.LivroDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -15,6 +24,11 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     /**
      * Creates new form JDlgLivro
      */
+    LivroNcc livroNcc;
+    boolean incluir;
+
+    private MaskFormatter data;
+
     public JDlgLivroNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -25,6 +39,37 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                 jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
 
+        try {
+            data = new MaskFormatter("##/##/####");
+            jFmtDataDeCadastro.setFormatterFactory(new DefaultFormatterFactory(data));
+            jFmtDataDePublicacao.setFormatterFactory(new DefaultFormatterFactory(data));
+
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgLivroNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public LivroNcc viewBean() {
+        LivroNcc livroNcc = new LivroNcc();
+        livroNcc.setIdLivroNcc(Util.strToInt(jTxtCodigo.getText()));
+        livroNcc.setTituloNcc(jTxtTitulo.getText());
+        livroNcc.setAutorNcc(jTxtAutor.getText());
+        livroNcc.setEdicaoNcc(jTxtEdicao.getText());
+        livroNcc.setNumPaginasNcc(jTxtNumeroDePaginas.getText());
+        livroNcc.setDataCadastroNcc(Util.strToDate(jFmtDataDeCadastro.getText()));
+        livroNcc.setDataPublicacaoNcc(Util.strToDate(jFmtDataDePublicacao.getText()));
+        return livroNcc;
+    }
+
+    public void beanView(LivroNcc livroNcc) {
+        this.livroNcc = livroNcc;
+        jTxtCodigo.setText(Util.intToStr(livroNcc.getIdLivroNcc()));
+        jTxtAutor.setText(livroNcc.getAutorNcc());
+        jTxtEdicao.setText(livroNcc.getEdicaoNcc());
+        jTxtNumeroDePaginas.setText(livroNcc.getNumPaginasNcc());
+        jTxtTitulo.setText(livroNcc.getTituloNcc());
+        jFmtDataDeCadastro.setText(Util.dateToStr(livroNcc.getDataCadastroNcc()));
+        jFmtDataDePublicacao.setText(Util.dateToStr(livroNcc.getDataPublicacaoNcc()));
     }
 
     /**
@@ -226,6 +271,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
                 jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        this.incluir = true;
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
@@ -237,9 +283,17 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        Util.limpar(jTxtAutor, jTxtCodigo, jTxtEdicao,
-                jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                jFmtDataDePublicacao);
+        if (Util.perguntar("Você quer excluir?") == true) {
+            LivroNcc livroNcc = viewBean();
+            LivroDAO livroDAO = new LivroDAO();
+            livroDAO.delete(livroNcc);
+            Util.msg("Exclusão efetuada com Sucesso");
+            Util.limpar(jTxtAutor, jTxtCodigo, jTxtEdicao,
+                    jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
+                    jFmtDataDePublicacao);
+        } else {
+            Util.msg("Exclusão cancelada");
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
@@ -247,7 +301,13 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
                 jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-
+        LivroDAO livroDAO = new LivroDAO();
+        LivroNcc livroNcc = viewBean();
+        if (this.incluir == true) {
+            livroDAO.insert(livroNcc);
+        } else {
+            livroDAO.update(livroNcc);
+        }
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed

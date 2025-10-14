@@ -5,6 +5,7 @@
  */
 package tools;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -19,17 +20,18 @@ import javax.swing.JTextField;
  * @author u03808019140
  */
 public class Util {
+
     public static void habilitar(boolean valor, JComponent... componentes) {
         for (int i = 0; i < componentes.length; i++) {
             componentes[i].setEnabled(valor);
-            
+
         }
     }
-    
+
     public static void limpar(JComponent... components) {
         for (int i = 0; i < components.length; i++) {
             if (components[i] instanceof JTextField) {
-                ((JTextField) components[i]).setText("");                
+                ((JTextField) components[i]).setText("");
             }
             if (components[i] instanceof JComboBox) {
                 ((JComboBox) components[i]).setSelectedIndex(-1);
@@ -45,14 +47,17 @@ public class Util {
             }
         }
     }
-    
+
     public static void msg(String cad) {
         JOptionPane.showMessageDialog(null, cad);
     }
 
-    public static boolean pergunta(String cad) {
-        JOptionPane.showMessageDialog(null, cad);
-        return true;
+    public static boolean perguntar(String cad) {
+        int option = JOptionPane.showConfirmDialog(null, cad, "Pergunta", JOptionPane.YES_OPTION);
+        if (option == JOptionPane.YES_OPTION) {
+            return true;
+        }
+        return false;
     }
 
     public static int strToInt(String num) {
@@ -63,11 +68,20 @@ public class Util {
         return String.valueOf(num);
     }
 
-    public static String strToDate(Date num) {
+    public static double strToDouble(String num) {
+        return Double.parseDouble(num);
+    }
+
+    public static String doubleToStr(double num) {
         return String.valueOf(num);
     }
 
-//    public static Date dateToStr(String num) {
-//        return Date.parse(num);
-//    }
+    public static Date strToDate(String data) {
+        return null;
+    }
+
+    public static String dateToStr(Date data) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(data);
+    }
 }
