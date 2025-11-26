@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package view;
+
+import bean.AutorNcc;
+import dao.AutorDAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author u03808019140
@@ -11,6 +17,7 @@ package view;
 public class JDlgAutorPesquisar extends javax.swing.JDialog {
 
     JDlgAutorNcc jDlgAutorNcc;
+    ControllerAutorNcc controllerAutorNcc;
 
     /**
      * Creates new form JDlgArtistaPesquisar
@@ -20,7 +27,11 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
         initComponents();
         setTitle("Pesquisar autor");
         setLocationRelativeTo(null);
-        
+        controllerAutorNcc = new ControllerAutorNcc();
+        AutorDAO autorDAO = new AutorDAO();
+        List lista = (List) autorDAO.listAll();
+        controllerAutorNcc.setList(lista);
+        jTblPesquisar.setModel(controllerAutorNcc);
     }
     public void setTelaAnterior(JDlgAutorNcc jDlgAutorNcc) {
         this.jDlgAutorNcc = jDlgAutorNcc;
@@ -89,7 +100,13 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-        System.exit(0);
+        if (jTblPesquisar.getSelectedRow() == -1) {
+            Util.msg("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            AutorNcc autorNcc = controllerAutorNcc.getBean(jTblPesquisar.getSelectedRow());
+            jDlgAutorNcc.beanView(autorNcc);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**

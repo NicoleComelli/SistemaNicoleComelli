@@ -14,38 +14,49 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ControllerVendasNcc extends AbstractTableModel {
 
-    private List vendasPesquisar;
+    private List listaVendas;
 
-    public void setList(List list) {
-        this.vendasPesquisar = list;
+    public void setList(List listaVendas) {
+        this.listaVendas = listaVendas;
+        this.fireTableDataChanged();
     }
 
     public VendasNcc getBean(int rowIndex) {
-        return (VendasNcc) vendasPesquisar.get(rowIndex);
+        return (VendasNcc) listaVendas.get(rowIndex);
+    }
+
+    public void addBean(VendasNcc vendasNcc) {
+        listaVendas.add(vendasNcc);
+        this.fireTableDataChanged();
+    }
+
+    public void removeBean(int rowIndex) {
+        listaVendas.remove(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return vendasPesquisar.size();
+        return listaVendas.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 5;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        VendasNcc VendasNcc = (VendasNcc) vendasPesquisar.get(rowIndex);
+        VendasNcc VendasNcc = (VendasNcc) listaVendas.get(rowIndex);
 
         if (columnIndex == 0) {
             return VendasNcc.getIdVendasNcc();
-
-        }
-        if (columnIndex == 1) {
+        } else if (columnIndex == 1) {
+            return VendasNcc.getClienteNcc();
+        } else if (columnIndex == 2) {
+            return VendasNcc.getVendedorNcc();
+        } else if (columnIndex == 3) {
             return VendasNcc.getDataVendaNcc();
-        }
-        if (columnIndex == 2) {
+        } else if (columnIndex == 4) {
             return VendasNcc.getTotalNcc();
         }
         return "";
@@ -57,12 +68,13 @@ public class ControllerVendasNcc extends AbstractTableModel {
 
         if (columnIndex == 0) {
             return "Código";
-
-        }
-        if (columnIndex == 1) {
+        } else if (columnIndex == 1) {
+            return "Cliente";
+        } else if (columnIndex == 2) {
+            return "Vendedor";
+        } else if (columnIndex == 3) {
             return "Data";
-        }
-        if (columnIndex == 2) {
+        } else if (columnIndex == 4) {
             return "Total";
         }
         return "";

@@ -44,7 +44,7 @@ public class VendasDAO extends AbstractDAO{
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasNcc.class);
-        criteria.add(Restrictions.eq("idusuarios", codigo));
+        criteria.add(Restrictions.eq("idVendasNcc", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -58,7 +58,10 @@ public class VendasDAO extends AbstractDAO{
         session.getTransaction().commit();
         return lista;
     }
-
+    public static void main(String[] args) {
+        VendasDAO vendasDAO = new VendasDAO();
+        vendasDAO.listAll();
+    }
     
     
 }

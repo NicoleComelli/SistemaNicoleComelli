@@ -4,12 +4,19 @@
  */
 package view;
 
+import bean.AutorNcc;
+import dao.AutorDAO;
 import tools.Util;
+
 /**
  *
  * @author u03808019140
  */
 public class JDlgAutorNcc extends javax.swing.JDialog {
+
+    boolean incluir;
+    AutorDAO autorDAO;
+    AutorNcc autorNcc;
 
     /**
      * Creates new form JDlgAutor
@@ -20,8 +27,31 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
         setTitle("Cadastrar Autor");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade, jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+
     }
 
+    public AutorNcc viewBean() {
+        AutorNcc autorNcc = new AutorNcc();
+        autorNcc.setIdAutorNcc(Util.strToInt(jTxtCodigo.getText()));
+        autorNcc.setDataNascimentoNcc(Util.strToDate(jFmtDataDeNascimento.getText()));
+        autorNcc.setDataObitoNcc(Util.strToDate(jFmtDataDeObito.getText()));
+        autorNcc.setEmailNcc(jFmtEmail.getText());
+        autorNcc.setNacionalidadeNcc(jTxtNacionalidade.getText());
+        autorNcc.setNomeNcc(jTxtNome.getText());
+        autorNcc.setPseudonimoNcc(jTxtPseudonimo.getText());
+        return autorNcc;
+    }
+
+    public void beanView(AutorNcc autorNcc) {
+        jTxtCodigo.setText(Util.intToStr(autorNcc.getIdAutorNcc()));
+        jFmtDataDeNascimento.setText(Util.dateToStr(autorNcc.getDataNascimentoNcc()));
+        jFmtDataDeObito.setText(Util.dateToStr(autorNcc.getDataObitoNcc()));
+        jTxtNome.setText(autorNcc.getNomeNcc());
+        jFmtEmail.setText(autorNcc.getEmailNcc());
+        jTxtNacionalidade.setText(autorNcc.getNacionalidadeNcc());
+        jTxtPseudonimo.setText(autorNcc.getPseudonimoNcc());
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -218,38 +248,64 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
-                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade,
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
                 jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        this.incluir = true;
+        jTxtCodigo.grabFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
-                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
-                jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
- Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        this.incluir = false;
+        if (this.autorNcc == null) {
+            Util.msg("É necessário fazer uma consulta antes de alterar!");
+        } else {
+            Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade,
+                    jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
+                    jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
+            Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        Util.limpar(jTxtCodigo, jTxtNome, jTxtNacionalidade, 
-                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
-                jFmtDataDeObito);
+        if (this.autorNcc == null) {
+            Util.msg("É necessario fazer uma consulta antes de excluir");
+        } else {
+            if (Util.perguntar("Deseja excluir?") == true) {
+                autorDAO = new AutorDAO();
+                autorDAO.delete(viewBean());
+                Util.msg("Exclusão feita com sucesso");
+                Util.limpar(jTxtCodigo, jTxtNome, jTxtNacionalidade,
+                        jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
+                        jFmtDataDeObito);
+            } else {
+                Util.msg("Exclusão cancelada");
+            }
+
+        }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-      Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
-                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+        autorNcc = viewBean();
+        autorDAO = new AutorDAO();
+        if (this.incluir == true) {
+            autorDAO.insert(autorNcc);
+        } else {
+            autorDAO.update(autorNcc);
+        }
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade,
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
                 jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
-       Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
-        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade, 
-                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, 
+        Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade,
+                jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
                 jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
-       Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-    
+        Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

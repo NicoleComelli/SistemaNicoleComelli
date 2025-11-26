@@ -5,6 +5,7 @@
  */
 package view;
 
+import bean.ClienteNcc;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,19 +15,29 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ControllerClienteNcc extends AbstractTableModel {
 
-    List lista;
+    List listaCliente;
 
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List listaCliente) {
+        this.listaCliente = listaCliente;
     }
 
-    public Object getBean(int rowIndex) {
-        return lista.get(rowIndex);
+    public ClienteNcc getBean(int rowIndex) {
+        return (ClienteNcc) listaCliente.get(rowIndex);
+    }
+
+    public void addBean(ClienteNcc clienteNcc) {
+        listaCliente.add(clienteNcc);
+        this.fireTableDataChanged();
+    }
+
+    public void removeBean(int rowIndex) {
+        listaCliente.remove(rowIndex);
+        this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return lista.size();
+        return listaCliente.size();
     }
 
     @Override
@@ -36,21 +47,28 @@ public class ControllerClienteNcc extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
+        ClienteNcc clienteNcc = (ClienteNcc) listaCliente.get(rowIndex);
+        if (columnIndex == 0) {
+            return clienteNcc.getIdClienteNcc();
+        } else if (columnIndex == 1) {
+            return clienteNcc.getNomeNcc();
+        } else if (columnIndex == 2) {
+            return clienteNcc.getCpfNcc();
+        } else if (columnIndex == 3) {
+            return clienteNcc.getTotalGastoNcc();
+        }
         return "";
     }
 
     public String getColumnName(int column) {
         if (column == 0) {
             return "Código";
-        }
-        if (column == 1) {
+        } else if (column == 1) {
             return "Nome";
-        }
-        if (column == 2) {
+        } else if (column == 2) {
             return "cpf";
-        }
-        if (column == 3) {
-            return "total gastto";
+        } else if (column == 3) {
+            return "total gasto";
         }
         return "";
     }

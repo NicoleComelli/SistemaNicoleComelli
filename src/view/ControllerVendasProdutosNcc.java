@@ -6,7 +6,6 @@
 package view;
 
 import bean.VendasProdutosNcc;
-import bean.UsuariosNcc;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,31 +15,30 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ControllerVendasProdutosNcc extends AbstractTableModel {
 
-    private List lista;
+    private List listaVendasProdutos;
 
-    public void setLista(List lista) {
-        this.lista = lista;
+    public void setLista(List listaVendasProdutos) {
+        this.listaVendasProdutos = listaVendasProdutos;
+        this.fireTableDataChanged();
     }
 
-    public VendasProdutosNcc getBean(int row) {
-        return (VendasProdutosNcc) lista.get(row);
+    public VendasProdutosNcc getBean(int rowIndex) {
+        return (VendasProdutosNcc) listaVendasProdutos.get(rowIndex);
     }
 
-    /**
-     *
-     * @param vendasProdutos
-     */
-    public void addBean(VendasProdutosNcc vendasProdutos) {
-        lista.add(vendasProdutos);
+    public void addBean(VendasProdutosNcc vendasProdutosNcc) {
+        listaVendasProdutos.add(vendasProdutosNcc);
+        this.fireTableDataChanged();
     }
 
-    public void deleteBean(int index) {
-        lista.remove(index);
+    public void removeBean(int rowIndex) {
+        listaVendasProdutos.remove(rowIndex);
+
     }
 
     @Override
     public int getRowCount() {
-        return lista.size();
+        return listaVendasProdutos.size();
     }
 
     @Override
@@ -50,26 +48,21 @@ public class ControllerVendasProdutosNcc extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        VendasProdutosNcc vendasProdutosNcc = (VendasProdutosNcc) lista.get(rowIndex);
+        VendasProdutosNcc vendasProdutosNcc = (VendasProdutosNcc) listaVendasProdutos.get(rowIndex);
         if (columnIndex == 0) {
             return vendasProdutosNcc.getIdVendasProdutosNcc();
-        }
-        if (columnIndex == 1) {
+        } else if (columnIndex == 1) {
             return vendasProdutosNcc.getLivroNcc().getTituloNcc();
-        }
-        if (columnIndex == 2) {
+        } else if (columnIndex == 2) {
             return vendasProdutosNcc.getLivroNcc().getAutorNcc();
-        }
-        if (columnIndex == 3) {
+        } else if (columnIndex == 3) {
             return vendasProdutosNcc.getQuantidadeNcc();
-        }
-        if (columnIndex == 4) {
+        } else if (columnIndex == 4) {
             return vendasProdutosNcc.getValorUnitarioNcc();
-        }
-        if (columnIndex == 5) {
+        } else if (columnIndex == 5) {
             return vendasProdutosNcc.getQuantidadeNcc() * vendasProdutosNcc.getValorUnitarioNcc();
         }
-        return null;
+        return "";
     }
 
     @Override

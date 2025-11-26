@@ -38,6 +38,7 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         jMnuLivro = new javax.swing.JMenuItem();
         jMnuUsuario = new javax.swing.JMenuItem();
         jMnuVendedor = new javax.swing.JMenuItem();
+        jMnuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMnuVendas = new javax.swing.JMenuItem();
 
@@ -104,6 +105,16 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         });
         jMenu1.add(jMnuVendedor);
 
+        jMnuSair.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/excluir.png"))); // NOI18N
+        jMnuSair.setText("Sair");
+        jMnuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMnuSair);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dados2.png"))); // NOI18N
@@ -169,6 +180,10 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         jDlgVendasNcc.setVisible(true);
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
+    private void jMnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSairActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMnuSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -213,6 +228,7 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMnuArtista;
     private javax.swing.JMenuItem jMnuCliente;
     private javax.swing.JMenuItem jMnuLivro;
+    private javax.swing.JMenuItem jMnuSair;
     private javax.swing.JMenuItem jMnuUsuario;
     private javax.swing.JMenuItem jMnuVendas;
     private javax.swing.JMenuItem jMnuVendedor;

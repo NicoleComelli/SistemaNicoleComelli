@@ -7,11 +7,6 @@ package view;
 
 import bean.ClienteNcc;
 import dao.ClienteDAO;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -24,9 +19,8 @@ public class JDlgClienteNcc extends javax.swing.JDialog {
      * Creates new form JDlgClienteNcc
      */
     ClienteNcc clienteNcc;
+    ClienteDAO clienteDAO;
     boolean incluir;
-
-    private MaskFormatter cpf, rg, tel, data, cep;
 
     public JDlgClienteNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -40,22 +34,6 @@ public class JDlgClienteNcc extends javax.swing.JDialog {
                 jTxtCidade, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
 
-        try {
-            data = new MaskFormatter("##/##/####");
-            cpf = new MaskFormatter("###-###-###.##");
-            tel = new MaskFormatter("(##) #####-####");
-            rg = new MaskFormatter("##.###.###-#");
-            cep = new MaskFormatter("#####-##");
-
-            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(data));
-            jFmtDataCadastro.setFormatterFactory(new DefaultFormatterFactory(data));
-            jFmtCPF.setFormatterFactory(new DefaultFormatterFactory(cpf));
-            jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(tel));
-            jFmtRG.setFormatterFactory(new DefaultFormatterFactory(rg));
-            jFmtCEP.setFormatterFactory(new DefaultFormatterFactory(cep));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgClienteNcc.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public ClienteNcc viewBean() {
@@ -426,38 +404,46 @@ public class JDlgClienteNcc extends javax.swing.JDialog {
                 jTxtNumero, jTxtComplemento, jTxtBairro,
                 jTxtCidade);
         this.incluir = true;
+        jTxtCodigo.grabFocus();
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
-        Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtIdade, jTxtEmail,
-                jFmtCPF, jFmtRG, jFmtTelefone, jFmtDataNascimento,
-                jFmtDataCadastro, jTxtTotalGasto, jFmtCEP, jTxtRua, jTxtOcupacao,
-                jTxtNumero, jTxtComplemento, jTxtBairro,
-                jTxtCidade, jBtnCancelar, jBtnConfirmar);
-        Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         this.incluir = false;
-
-    }//GEN-LAST:event_jBtnAlterarActionPerformed
-
-    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (Util.perguntar("Deseja excluir?") == true) {
-            ClienteNcc clienteNcc = viewBean();
-            ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.delete(clienteNcc);
-            Util.msg("Exclusão efetuada com sucesso");
-            Util.limpar(jTxtCodigo, jTxtNome, jTxtIdade, jTxtEmail,
+        if (this.clienteNcc == null) {
+            Util.msg("É necessário fazer uma consulta antes de alterar!");
+        } else {
+            Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtIdade, jTxtEmail,
                     jFmtCPF, jFmtRG, jFmtTelefone, jFmtDataNascimento,
                     jFmtDataCadastro, jTxtTotalGasto, jFmtCEP, jTxtRua, jTxtOcupacao,
                     jTxtNumero, jTxtComplemento, jTxtBairro,
-                    jTxtCidade);
+                    jTxtCidade, jBtnCancelar, jBtnConfirmar);
+            Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        }
+    }//GEN-LAST:event_jBtnAlterarActionPerformed
+
+    private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
+        if (this.clienteNcc == null) {
+            Util.msg("É necessario fazer uma consulta antes de excluir");
         } else {
-            Util.msg("Exclusão cancelada");
+            if (Util.perguntar("Deseja excluir?") == true) {
+                clienteNcc = viewBean();
+                clienteDAO = new ClienteDAO();
+                clienteDAO.delete(clienteNcc);
+                Util.msg("Exclusão efetuada com sucesso");
+                Util.limpar(jTxtCodigo, jTxtNome, jTxtIdade, jTxtEmail,
+                        jFmtCPF, jFmtRG, jFmtTelefone, jFmtDataNascimento,
+                        jFmtDataCadastro, jTxtTotalGasto, jFmtCEP, jTxtRua, jTxtOcupacao,
+                        jTxtNumero, jTxtComplemento, jTxtBairro,
+                        jTxtCidade);
+            } else {
+                Util.msg("Exclusão cancelada");
+            }
         }
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        ClienteNcc clienteNcc = viewBean();
-        ClienteDAO clienteDAO = new ClienteDAO();
+        clienteNcc = viewBean();
+        clienteDAO = new ClienteDAO();
         if (this.incluir == true) {
             clienteDAO.insert(clienteNcc);
         } else {

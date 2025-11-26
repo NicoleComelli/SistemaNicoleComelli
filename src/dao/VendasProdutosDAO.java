@@ -5,6 +5,8 @@
  */
 package dao;
 
+import bean.LivroNcc;
+import bean.VendasNcc;
 import bean.VendasProdutosNcc;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -14,7 +16,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author u03808019140
  */
-public class VendasProdutosDAO extends AbstractDAO{
+public class VendasProdutosDAO extends AbstractDAO {
 
     @Override
     public void insert(Object object) {
@@ -45,7 +47,16 @@ public class VendasProdutosDAO extends AbstractDAO{
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasProdutosNcc.class);
-        criteria.add(Restrictions.eq("idusuarios", codigo));
+        criteria.add(Restrictions.eq("idPedidosProdutos", codigo));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listLivro(LivroNcc livroNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(VendasProdutosNcc.class);
+        criteria.add(Restrictions.eq("idPedidosProdutos", livroNcc));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -59,7 +70,8 @@ public class VendasProdutosDAO extends AbstractDAO{
         session.getTransaction().commit();
         return lista;
     }
-
-    
-    
+    public static void main(String[] args) {
+        VendasProdutosDAO vendasProdutosDAO = new VendasProdutosDAO();
+        vendasProdutosDAO.listAll();
+    }
 }

@@ -5,6 +5,7 @@
  */
 package view;
 
+import bean.AutorNcc;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,19 +15,29 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ControllerAutorNcc extends AbstractTableModel {
 
-    List lista;
+    List listaAutor;
 
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List listaAutor) {
+        this.listaAutor = listaAutor;
     }
 
-    public Object getBean(int rowIndex) {
-        return lista.get(rowIndex);
+    public AutorNcc getBean(int rowIndex) {
+        return (AutorNcc) listaAutor.get(rowIndex);
+    }
+
+    public void addBean(AutorNcc autorNcc) {
+        listaAutor.add(autorNcc);
+        this.fireTableDataChanged();
+    }
+
+    public void removeBean(int rowIndex) {
+        listaAutor.remove(rowIndex);
+        this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return lista.size();
+        return listaAutor.size();
     }
 
     @Override
@@ -36,19 +47,25 @@ public class ControllerAutorNcc extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        return 0;
+        AutorNcc autorNcc = (AutorNcc) listaAutor.get(rowIndex);
+        if (columnIndex == 0) {
+            return autorNcc.getIdAutorNcc();
+        } else if (columnIndex == 1) {
+            return autorNcc.getNomeNcc();
+        } else if (columnIndex == 2) {
+            return autorNcc.getPseudonimoNcc();
+        }
+        return "";
     }
 
     @Override
     public String getColumnName(int column) {
         if (column == 0) {
             return "Código";
-        }
-        if (column == 1) {
+        } else if (column == 1) {
             return "Nome";
-        }
-        if (column == 2) {
-            return "Nacionalidade";
+        } else if (column == 2) {
+            return "Pseudonimo";
         }
         return "";
     }

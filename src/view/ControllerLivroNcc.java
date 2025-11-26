@@ -5,6 +5,7 @@
  */
 package view;
 
+import bean.LivroNcc;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -12,35 +13,59 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author u03808019140
  */
-public class ControllerLivroNcc extends AbstractTableModel{
+public class ControllerLivroNcc extends AbstractTableModel {
 
-    List lista;
+    List listaLivro;
 
-    public void setList(List lista) {
-        this.lista = lista;
+    public void setList(List listaLivro) {
+        this.listaLivro = listaLivro;
     }
-    public Object getBean(int rowIndex){
-    return lista.get(rowIndex);
-    }   
+
+    public LivroNcc getBean(int rowIndex) {
+        return (LivroNcc) listaLivro.get(rowIndex);
+    }
+
+    public void addBean(LivroNcc livroNcc) {
+        listaLivro.add(livroNcc);
+        this.fireTableDataChanged();
+    }
+
+    public void removeBean(int rowIndex) {
+        listaLivro.remove(rowIndex);
+        this.fireTableDataChanged();
+    }
+
     @Override
     public int getRowCount() {
-     return lista.size();    }
+        return listaLivro.size();
+    }
 
     @Override
     public int getColumnCount() {
         return 3;
-        }
+    }
 
-@Override
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        
+        LivroNcc livroNcc = (LivroNcc) listaLivro.get(rowIndex);
+        if (columnIndex == 0) {
+            return livroNcc.getIdLivroNcc();
+        } else if (columnIndex == 1) {
+            return livroNcc.getTituloNcc();
+        } else if (columnIndex == 2) {
+            return livroNcc.getAutorNcc();
+        }
         return "";
     }
-    public String getColumnName(int column){
-        if (column == 0 ) return "Código";
-        if (column == 1 ) return "Titulo";
-        if (column == 2 ) return "Autor";
-        return "";
-}
-}
 
+    public String getColumnName(int column) {
+        if (column == 0) {
+            return "Código";
+        } else if (column == 1) {
+            return "Titulo";
+        } else if (column == 2) {
+            return "Autor";
+        }
+        return "";
+    }
+}

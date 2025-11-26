@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package view;
+
+import bean.LivroNcc;
+import dao.LivroDAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author u03808019140
@@ -11,6 +17,7 @@ package view;
 public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
 
     JDlgLivroNcc jDlgLivroNcc;
+    ControllerLivroNcc controllerLivroNcc;
     /**
      * Creates new form JDlgLivroPesquisar
      */
@@ -19,7 +26,11 @@ public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
         initComponents();
         setTitle("Pesquisar livro");
         setLocationRelativeTo(null);
-        
+        controllerLivroNcc = new ControllerLivroNcc();
+        LivroDAO livroDAO = new LivroDAO();
+        List lista = (List) livroDAO.listAll();
+        controllerLivroNcc.setList(lista);
+        jTblPesquisar.setModel(controllerLivroNcc);
     }
     
     public void setTelaAnterior(JDlgLivroNcc jDlgLivroNcc) {
@@ -52,6 +63,11 @@ public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTblPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblPesquisarMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblPesquisar);
 
         jBtnOK.setText("OK");
@@ -86,8 +102,20 @@ public class JDlgLivroPesquisarNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-        System.exit(0);
+        if (jTblPesquisar.getSelectedRow() == -1) {
+            Util.msg("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            LivroNcc livroNcc = controllerLivroNcc.getBean(jTblPesquisar.getSelectedRow());
+            jDlgLivroNcc.beanView(livroNcc);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOKActionPerformed
+
+    private void jTblPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPesquisarMouseClicked
+        if (evt.getClickCount() == 2) {
+            jBtnOKActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTblPesquisarMouseClicked
 
     /**
      * @param args the command line arguments

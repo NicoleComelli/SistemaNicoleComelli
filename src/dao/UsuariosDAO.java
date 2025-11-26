@@ -45,7 +45,7 @@ public class UsuariosDAO extends AbstractDAO {
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(UsuariosNcc.class);
-        criteria.add(Restrictions.eq("idusuarios", codigo));
+        criteria.add(Restrictions.eq("idUsuariosNcc", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

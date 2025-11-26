@@ -21,9 +21,8 @@ import tools.Util;
 public class JDlgVendedorNcc extends javax.swing.JDialog {
 
     boolean incluir;
-
-    private MaskFormatter cpf, dataNascimento, telefone;
-    private VendedorNcc vendedorNcc;
+    VendedorNcc vendedorNcc;
+    VendedorDAO vendedorDAO;
 
     public JDlgVendedorNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,17 +34,6 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
-        try {
-            dataNascimento = new MaskFormatter("##/##/####");
-            cpf = new MaskFormatter("###.###.###-##");
-            telefone = new MaskFormatter("(##) #####-####");
-
-            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(cpf));
-            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(dataNascimento));
-            jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(telefone));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     public VendedorNcc viewBean() {
@@ -312,6 +300,7 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        this.incluir = false;
         if (this.vendedorNcc == null) {
             Util.msg("É necessário fazer uma consulta antes de alterar");
         } else {
@@ -320,13 +309,12 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
                     jBtnConfirmar, jBtnCancelar);
             Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                     jBtnPesquisar);
-            this.incluir = false;
         }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        VendedorDAO vendedorDAO = new VendedorDAO();
-        VendedorNcc vendedorNcc = viewBean();
+        vendedorDAO = new VendedorDAO();
+        vendedorNcc = viewBean();
         if (this.incluir == true) {
             vendedorDAO.insert(vendedorNcc);
         } else {

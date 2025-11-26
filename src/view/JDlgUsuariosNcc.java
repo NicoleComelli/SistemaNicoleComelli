@@ -6,11 +6,6 @@ package view;
 
 import bean.UsuariosNcc;
 import dao.UsuariosDAO;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -20,9 +15,8 @@ import tools.Util;
 public class JDlgUsuariosNcc extends javax.swing.JDialog {
 
     UsuariosNcc usuariosNcc;
+    UsuariosDAO usuariosDAO;
     boolean incluir;
-
-    private MaskFormatter cpf, data;
 
     public JDlgUsuariosNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,16 +28,6 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
-        try {
-            data = new MaskFormatter("##/##/####");
-            cpf = new MaskFormatter("###.###.###-##");
-
-            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(data));
-            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(cpf));
-        } catch (ParseException ex) {
-            Logger.getLogger(JDlgUsuariosNcc.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
 
     public UsuariosNcc viewBean() {
@@ -295,8 +279,8 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnIncluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
-        UsuariosNcc usuariosNcc = viewBean();
-        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        usuariosNcc = viewBean();
+        usuariosDAO = new UsuariosDAO();
         if (this.incluir == true) {
             usuariosDAO.insert(usuariosNcc);
         } else {
@@ -311,16 +295,14 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
+        incluir = false;
         if (this.usuariosNcc == null) {
             Util.msg("É necessário fazer uma consulta antes de alterar");
         } else {
-
             Util.habilitar(true, jTxtNome, jTxtCodigo, jTxtApelido,
                     jFmtCpf, jFmtDataNascimento, jPwdSenha, jCboNivel,
                     jChbAtivo, jBtnConfirmar, jBtnCancelar);
             Util.habilitar(false, jBtnIncluir, jBtnAlterar, jBtnExcluir, jBtnPesquisar);
-            incluir = false;
-            jTxtCodigo.grabFocus();
         }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
@@ -336,16 +318,16 @@ public class JDlgUsuariosNcc extends javax.swing.JDialog {
         if (this.usuariosNcc == null) {
             Util.msg("É necessário fazer uma consulta antes de alterar");
         } else {
-        if (Util.perguntar("Deseja excluir ?") == true) {
-            UsuariosDAO usuariosDAO = new UsuariosDAO();
-            usuariosDAO.delete(viewBean());
-            Util.msg("Exclusão feita com sucesso");
-            Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
-                    jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
-        } else {
-            Util.msg("Exclusão cancelada");
+            if (Util.perguntar("Deseja excluir ?") == true) {
+                UsuariosDAO usuariosDAO = new UsuariosDAO();
+                usuariosDAO.delete(viewBean());
+                Util.msg("Exclusão feita com sucesso");
+                Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido, jFmtCpf,
+                        jFmtDataNascimento, jPwdSenha, jCboNivel, jChbAtivo);
+            } else {
+                Util.msg("Exclusão cancelada");
+            }
         }
-
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

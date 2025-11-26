@@ -5,6 +5,11 @@
  */
 package view;
 
+import bean.UsuariosNcc;
+import dao.UsuariosDAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author u03808019140
@@ -12,6 +17,7 @@ package view;
 public class JDlgUsuariosPesquisarNcc extends javax.swing.JDialog {
 
     JDlgUsuariosNcc jDlgUsuariosNcc;
+    ControllerUsuarioNcc controllerUsuarioNcc;
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
@@ -20,7 +26,11 @@ public class JDlgUsuariosPesquisarNcc extends javax.swing.JDialog {
         initComponents();
         setTitle("Pesquisar usuários");
         setLocationRelativeTo(null);
-        
+        controllerUsuarioNcc = new ControllerUsuarioNcc();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = (List) usuariosDAO.listAll();
+        controllerUsuarioNcc.setList(lista);
+        jTblPesquisar.setModel(controllerUsuarioNcc);
     }
     public void setTelaAnterior(JDlgUsuariosNcc jDlgUsuariosNcc) {
         this.jDlgUsuariosNcc = jDlgUsuariosNcc;
@@ -53,6 +63,11 @@ public class JDlgUsuariosPesquisarNcc extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTblPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblPesquisarMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblPesquisar);
 
         jBtnOK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
@@ -88,8 +103,20 @@ public class JDlgUsuariosPesquisarNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-        System.exit(0);
+        if (jTblPesquisar.getSelectedRow() == -1) {
+            Util.msg("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            UsuariosNcc usuariosNcc = controllerUsuarioNcc.getBean(jTblPesquisar.getSelectedRow());
+            jDlgUsuariosNcc.beanView(usuariosNcc);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOKActionPerformed
+
+    private void jTblPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPesquisarMouseClicked
+        if (evt.getClickCount() == 2) {
+            jBtnOKActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTblPesquisarMouseClicked
 
     /**
      * @param args the command line arguments

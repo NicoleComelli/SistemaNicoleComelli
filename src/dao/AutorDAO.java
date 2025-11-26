@@ -6,7 +6,6 @@
 package dao;
 
 import bean.AutorNcc;
-import bean.UsuariosNcc;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -46,7 +45,7 @@ public class AutorDAO extends AbstractDAO{
     public Object list(int codigo) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(AutorNcc.class);
-        criteria.add(Restrictions.eq("idusuarios", codigo));
+        criteria.add(Restrictions.eq("idAutorNcc", codigo));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

@@ -5,6 +5,11 @@
  */
 package view;
 
+import bean.ClienteNcc;
+import dao.ClienteDAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author u03808019140
@@ -12,6 +17,8 @@ package view;
 public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
 
     JDlgClienteNcc jDlgClienteNcc;
+    ControllerClienteNcc controllerClienteNcc;
+
     /**
      * Creates new form JDlgClientePesquisar
      */
@@ -20,8 +27,13 @@ public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
         initComponents();
         setTitle("Pesquisar usuarios");
         setLocationRelativeTo(null);
-        
+        controllerClienteNcc = new ControllerClienteNcc();
+        ClienteDAO clienteDAO = new ClienteDAO();
+        List lista = (List) clienteDAO.listAll();
+        controllerClienteNcc.setList(lista);
+        jTblPesquisar.setModel(controllerClienteNcc);
     }
+
     public void setTelaAnterior(JDlgClienteNcc jDlgClienteNcc) {
         this.jDlgClienteNcc = jDlgClienteNcc;
     }
@@ -52,6 +64,11 @@ public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTblPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblPesquisarMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblPesquisar);
 
         jBtnOK.setText("OK");
@@ -88,8 +105,20 @@ public class JDlgClientePesquisarNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-        System.exit(0);
+        if (jTblPesquisar.getSelectedRow() == -1) {
+            Util.msg("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            ClienteNcc clienteNcc = controllerClienteNcc.getBean(jTblPesquisar.getSelectedRow());
+            jDlgClienteNcc.beanView(clienteNcc);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOKActionPerformed
+
+    private void jTblPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPesquisarMouseClicked
+        if (evt.getClickCount() == 2) {
+            jBtnOKActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTblPesquisarMouseClicked
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,11 @@
  */
 package view;
 
+import bean.VendedorNcc;
+import dao.VendedorDAO;
+import java.util.List;
+import tools.Util;
+
 /**
  *
  * @author u03808019140
@@ -12,6 +17,7 @@ package view;
 public class JDlgVendedorPesquisarNcc extends javax.swing.JDialog {
 
     JDlgVendedorNcc jDlgVendedorNcc;
+    ControllerVendedorNcc controllerVendedorNcc;
     /**
      * Creates new form JDlgVendedorPesquisar
      */
@@ -20,7 +26,11 @@ public class JDlgVendedorPesquisarNcc extends javax.swing.JDialog {
         initComponents();
         setTitle("Pesquisar Vendedor");
         setLocationRelativeTo(null);
-        
+        controllerVendedorNcc = new ControllerVendedorNcc();
+        VendedorDAO vendedorDAO = new VendedorDAO();
+        List lista = (List) vendedorDAO.listAll();
+        controllerVendedorNcc.setList(lista);
+        jTblPesquisar.setModel(controllerVendedorNcc);
     }
     public void setTelaAnterior(JDlgVendedorNcc jDlgVendedorNcc) {
         this.jDlgVendedorNcc = jDlgVendedorNcc;
@@ -54,6 +64,11 @@ public class JDlgVendedorPesquisarNcc extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTblPesquisar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblPesquisarMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTblPesquisar);
 
         jBtnOK.setText("OK");
@@ -88,8 +103,20 @@ public class JDlgVendedorPesquisarNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-        System.exit(0);
+        if (jTblPesquisar.getSelectedRow() == -1) {
+            Util.msg("Nenhum registro foi selecionada. Favor selecionar um registro.");
+        } else {
+            VendedorNcc vendedorNcc = controllerVendedorNcc.getBean(jTblPesquisar.getSelectedRow());
+            jDlgVendedorNcc.beanView(vendedorNcc);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jBtnOKActionPerformed
+
+    private void jTblPesquisarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblPesquisarMouseClicked
+        if (evt.getClickCount() == 2) {
+            jBtnOKActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTblPesquisarMouseClicked
 
     /**
      * @param args the command line arguments
