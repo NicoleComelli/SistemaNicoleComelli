@@ -28,7 +28,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtAutor, jTxtCodigo, jTxtEdicao,
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar, jTxtValorUn);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
     }
 
@@ -84,6 +84,8 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
         jBtnCancelar = new javax.swing.JButton();
         jBtnPesquisar = new javax.swing.JButton();
         jFmtDataDeCadastro = new javax.swing.JFormattedTextField();
+        jTxtValorUn = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -149,6 +151,8 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             }
         });
 
+        jLabel6.setText("Valor unitário");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,6 +206,10 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addComponent(jTxtValorUn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -229,12 +237,14 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtNumeroDePaginas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jFmtDataDePublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFmtDataDeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFmtDataDeCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtValorUn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnIncluir)
@@ -252,7 +262,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     private void jBtnIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirActionPerformed
         Util.habilitar(true, jTxtAutor, jTxtCodigo, jTxtEdicao,
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar, jTxtValorUn);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         this.incluir = true;
         jTxtCodigo.grabFocus();
@@ -265,7 +275,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
         } else {
         Util.habilitar(true, jTxtAutor, jTxtCodigo, jTxtEdicao,
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar, jTxtValorUn);
         Util.habilitar(false, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         }
     }//GEN-LAST:event_jBtnAlterarActionPerformed
@@ -281,7 +291,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
             Util.msg("Exclusão efetuada com Sucesso");
             Util.limpar(jTxtAutor, jTxtCodigo, jTxtEdicao,
                     jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                    jFmtDataDePublicacao);
+                    jFmtDataDePublicacao, jTxtValorUn);
         } else {
             Util.msg("Exclusão cancelada");
         }
@@ -291,7 +301,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
         Util.habilitar(false, jTxtAutor, jTxtCodigo, jTxtEdicao,
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar, jTxtValorUn);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
         livroDAO = new LivroDAO();
         livroNcc = viewBean();
@@ -305,7 +315,7 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
         Util.habilitar(false, jTxtAutor, jTxtCodigo, jTxtEdicao,
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
-                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar);
+                jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar, jTxtValorUn);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
      }//GEN-LAST:event_jBtnCancelarActionPerformed
 
@@ -373,11 +383,13 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTxtAutor;
     private javax.swing.JTextField jTxtCodigo;
     private javax.swing.JTextField jTxtEdicao;
     private javax.swing.JTextField jTxtNumeroDePaginas;
     private javax.swing.JTextField jTxtTitulo;
+    private javax.swing.JTextField jTxtValorUn;
     // End of variables declaration//GEN-END:variables
 }

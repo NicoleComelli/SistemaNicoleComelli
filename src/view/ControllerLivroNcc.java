@@ -42,7 +42,7 @@ public class ControllerLivroNcc extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -54,6 +54,8 @@ public class ControllerLivroNcc extends AbstractTableModel {
             return livroNcc.getTituloNcc();
         } else if (columnIndex == 2) {
             return livroNcc.getAutorNcc();
+        }  else if (columnIndex == 3) {
+            return livroNcc.getValorUnNcc();
         }
         return "";
     }
@@ -65,6 +67,8 @@ public class ControllerLivroNcc extends AbstractTableModel {
             return "Titulo";
         } else if (column == 2) {
             return "Autor";
+        } else if (column == 3) {
+            return "Valor unitário";
         }
         return "";
     }

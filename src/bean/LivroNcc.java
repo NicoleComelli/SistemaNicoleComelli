@@ -3,7 +3,6 @@ package bean;
 
 
 import java.util.Date;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -28,6 +27,8 @@ public class LivroNcc  implements java.io.Serializable {
      private String edicaoNcc;
      private Date dataCadastroNcc;
      private Date dataPublicacaoNcc;
+     private double valorUnNcc;
+     private int pagamentoNcc;
 
     public LivroNcc() {
     }
@@ -37,7 +38,7 @@ public class LivroNcc  implements java.io.Serializable {
         this.idLivroNcc = idLivroNcc;
     }
     public LivroNcc(int idLivroNcc, String tituloNcc, String numPaginasNcc, String autorNcc, String edicaoNcc, 
-            Date dataCadastroNcc, Date dataPublicacaoNcc) {
+            Date dataCadastroNcc, Date dataPublicacaoNcc, double valorUnNcc, int pagamentoNcc) {
        this.idLivroNcc = idLivroNcc;
        this.tituloNcc = tituloNcc;
        this.numPaginasNcc = numPaginasNcc;
@@ -45,6 +46,8 @@ public class LivroNcc  implements java.io.Serializable {
        this.edicaoNcc = edicaoNcc;
        this.dataCadastroNcc = dataCadastroNcc;
        this.dataPublicacaoNcc = dataPublicacaoNcc;
+       this.valorUnNcc = valorUnNcc;
+       this.pagamentoNcc = pagamentoNcc;
     }
    
      @Id 
@@ -118,10 +121,25 @@ public class LivroNcc  implements java.io.Serializable {
     public void setDataPublicacaoNcc(Date dataPublicacaoNcc) {
         this.dataPublicacaoNcc = dataPublicacaoNcc;
     }
-
-
-
-
+    
+    @Column(name="totalGastoNcc", precision=10)
+    public double getValorUnNcc() {
+        return this.valorUnNcc;
+    }
+    
+    public void setValorUnNcc(double valorUnNcc) {
+        this.valorUnNcc = valorUnNcc;
+    }
+    
+    @Column(name="pagamentoNcc")
+    public int getPagamentoNcc() {
+        return this.pagamentoNcc;
+    }
+    
+    public void setPagamentoNcc(int pagamentoNcc) {
+        this.pagamentoNcc = pagamentoNcc;
+    }
+    
 }
 
 
