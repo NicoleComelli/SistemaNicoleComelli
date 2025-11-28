@@ -33,6 +33,7 @@ public class ControllerVendasProdutosNcc extends AbstractTableModel {
 
     public void removeBean(int rowIndex) {
         listaVendasProdutos.remove(rowIndex);
+        this.fireTableDataChanged();
 
     }
 
@@ -69,20 +70,15 @@ public class ControllerVendasProdutosNcc extends AbstractTableModel {
     public String getColumnName(int columnIndex) {
         if (columnIndex == 0) {
             return "Código";
-        }
-        if (columnIndex == 1) {
+        } else if (columnIndex == 1) {
             return "Título";
-        }
-        if (columnIndex == 2) {
+        } else if (columnIndex == 2) {
             return "Autor";
-        }
-        if (columnIndex == 3) {
+        } else if (columnIndex == 3) {
             return "Quantidade";
-        }
-        if (columnIndex == 4) {
+        } else if (columnIndex == 4) {
             return "Valor Unitario";
-        }
-        if (columnIndex == 5) {
+        } else if (columnIndex == 5) {
             return "Total";
         }
         return "";

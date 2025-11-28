@@ -7,11 +7,6 @@ package view;
 
 import bean.VendedorNcc;
 import dao.VendedorDAO;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -268,7 +263,7 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
             Util.limpar(jTxtNome, jTxtCodigo, jTxtApelido,
                     jFmtCpf, jFmtDataNascimento, jTxtEmail, jFmtTelefone);
         } else {
-            Util.msg("Excluaão cancelada");
+            Util.msg("Exclusão cancelada");
         }
 
     }//GEN-LAST:event_jBtnExcluirActionPerformed

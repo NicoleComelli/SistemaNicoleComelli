@@ -5,7 +5,10 @@
  */
 package view;
 
+import bean.LivroNcc;
 import bean.VendasProdutosNcc;
+import dao.LivroDAO;
+import java.util.List;
 import tools.Util;
 
 /**
@@ -14,6 +17,8 @@ import tools.Util;
  */
 public class JDlgVendasProdutos extends javax.swing.JDialog {
 
+    JDlgVendasNcc jDlgVendasNcc;
+    boolean incluir = false;
     /**
      * Creates new form JDlgVendasProdutos
      */
@@ -22,9 +27,28 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
     public JDlgVendasProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Selecionar venda");
+        setTitle("Selecionar venda de produtos");
         setLocationRelativeTo(null);
-
+        jTxtQtd.setText("1");
+        LivroDAO livroDAO = new LivroDAO();
+        List lista = (List) livroDAO.listAll();
+        for (Object object : lista) {
+            jCboLivro.addItem((LivroNcc) object);
+        }
+        Util.habilitar(false, jTxtValorUn, jTxtTotal);
+        
+    }
+    
+    public void setTelaAnterior(JDlgVendasNcc jDlgVendasNcc, VendasProdutosNcc vendasProdutosNcc) {
+        this.jDlgVendasNcc = jDlgVendasNcc;
+        if (vendasProdutosNcc != null) {
+            incluir = false;
+            jCboLivro.setSelectedItem(vendasProdutosNcc.getLivroNcc());
+            jTxtQtd.setText(Util.intToStr(vendasProdutosNcc.getQuantidadeNcc()));
+        } else {
+            incluir = true;
+        }
+    
     }
     
     /**
@@ -55,6 +79,11 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         jLabel1.setText("Livro");
 
         jCboLivro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jCboLivro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboLivroActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Quantidade");
 
@@ -78,6 +107,11 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
 
         jBtnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnCancelar.setText("Cancelar");
+        jBtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnCancelarActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRbPix);
         jRbPix.setText("PIX/dinheiro");
@@ -153,6 +187,17 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
+vendasProdutosNcc = new VendasProdutosNcc();
+        vendasProdutosNcc.setLivroNcc((LivroNcc) jCboLivro.getSelectedItem());
+        vendasProdutosNcc.setQuantidadeNcc(Util.strToInt(jTxtQtd.getText()));
+        vendasProdutosNcc.setValorUnitarioNcc(Util.strToDouble(jTxtValorUn.getText()));
+        jDlgVendasNcc.controllerVendasProdutosNcc.addBean(vendasProdutosNcc);
+        if (incluir == true) {
+            jDlgVendasNcc.controllerVendasProdutosNcc.addBean(vendasProdutosNcc);
+        } else {
+            jDlgVendasNcc.controllerVendasProdutosNcc.removeBean(jDlgVendasNcc.getjTblVendas().getSelectedRow());
+            jDlgVendasNcc.controllerVendasProdutosNcc.addBean(vendasProdutosNcc);
+        }
         setVisible(false);
     }//GEN-LAST:event_jBtnOKActionPerformed
 
@@ -171,6 +216,20 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jTxtQtdKeyReleased
+
+    private void jCboLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboLivroActionPerformed
+if (jTxtQtd.getText().isEmpty() == false) {
+            LivroNcc livroNcc = (LivroNcc) jCboLivro.getSelectedItem();
+            int quant = Util.strToInt(jTxtQtd.getText());
+            jTxtTotal.setText(Util.doubleToStr(quant * livroNcc.getValorUnNcc()));
+        } else {
+            Util.limpar(jTxtTotal);
+        }
+    }//GEN-LAST:event_jCboLivroActionPerformed
+
+    private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,7 +5,6 @@
  */
 package dao;
 
-import bean.LivroNcc;
 import bean.VendasNcc;
 import bean.VendasProdutosNcc;
 import java.util.List;
@@ -42,6 +41,18 @@ public class VendasProdutosDAO extends AbstractDAO {
         session.delete(object);
         session.getTransaction().commit();
     }
+    
+     public void deleteProdutos(VendasNcc vendasNcc) {
+        List lista = (List) listLivro(vendasNcc);
+        session.beginTransaction();
+        for (int i = 0; i < lista.size(); i++) {
+            VendasProdutosNcc vendasProdutosNcc = (VendasProdutosNcc) lista.get(i);
+            session.flush();
+            session.clear();
+            session.delete(vendasProdutosNcc);
+        }
+        session.getTransaction().commit();
+    }
 
     @Override
     public Object list(int codigo) {
@@ -53,10 +64,10 @@ public class VendasProdutosDAO extends AbstractDAO {
         return lista;
     }
 
-    public Object listLivro(LivroNcc livroNcc) {
+    public Object listLivro(VendasNcc vendasNcc) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(VendasProdutosNcc.class);
-        criteria.add(Restrictions.eq("idPedidosProdutos", livroNcc));
+        criteria.add(Restrictions.eq("vendasNcc", vendasNcc));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

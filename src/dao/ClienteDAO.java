@@ -5,7 +5,6 @@
  */
 package dao;
 
-import bean.AutorNcc;
 import bean.ClienteNcc;
 import java.util.List;
 import org.hibernate.Criteria;

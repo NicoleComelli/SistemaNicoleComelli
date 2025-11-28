@@ -140,6 +140,15 @@ public class LivroNcc  implements java.io.Serializable {
         this.pagamentoNcc = pagamentoNcc;
     }
     
+    public boolean equals(Object object) {
+        if (object instanceof LivroNcc) {
+            LivroNcc livroNcc = (LivroNcc) object;
+            if (livroNcc.getIdLivroNcc()== this.getIdLivroNcc()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 
