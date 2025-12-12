@@ -31,6 +31,12 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem3 = new javax.swing.JMenuItem();
+        jToolBar1 = new javax.swing.JToolBar();
+        jBtnClienteCadastrar = new javax.swing.JButton();
+        jBtnLivroCadastrar = new javax.swing.JButton();
+        jBtnVendasMovimento = new javax.swing.JButton();
+        jBtnClientesConsultar = new javax.swing.JButton();
+        jBtnLivroConsultar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMnuArtista = new javax.swing.JMenuItem();
@@ -41,10 +47,72 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
         jMnuSair = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMnuVendas = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMnuConsultaClientes = new javax.swing.JMenuItem();
+        jMnuConsultaVendas = new javax.swing.JMenuItem();
+        jMnuConsultaLivros = new javax.swing.JMenuItem();
+        jMnuConsultaAutores = new javax.swing.JMenuItem();
 
         jMenuItem3.setText("jMenuItem3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jToolBar1.setRollover(true);
+
+        jBtnClienteCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addConta.png"))); // NOI18N
+        jBtnClienteCadastrar.setFocusable(false);
+        jBtnClienteCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnClienteCadastrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnClienteCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnClienteCadastrarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnClienteCadastrar);
+
+        jBtnLivroCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nota.png"))); // NOI18N
+        jBtnLivroCadastrar.setFocusable(false);
+        jBtnLivroCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnLivroCadastrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnLivroCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLivroCadastrarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnLivroCadastrar);
+
+        jBtnVendasMovimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/sacola.png"))); // NOI18N
+        jBtnVendasMovimento.setFocusable(false);
+        jBtnVendasMovimento.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnVendasMovimento.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnVendasMovimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnVendasMovimentoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnVendasMovimento);
+
+        jBtnClientesConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/contas1.png"))); // NOI18N
+        jBtnClientesConsultar.setFocusable(false);
+        jBtnClientesConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnClientesConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnClientesConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnClientesConsultarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnClientesConsultar);
+
+        jBtnLivroConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/olho1.png"))); // NOI18N
+        jBtnLivroConsultar.setFocusable(false);
+        jBtnLivroConsultar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBtnLivroConsultar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jBtnLivroConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnLivroConsultarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jBtnLivroConsultar);
 
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/salvar.png"))); // NOI18N
         jMenu1.setMnemonic('d');
@@ -134,25 +202,73 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arquivos.png"))); // NOI18N
+        jMenu3.setText("Consultas");
+
+        jMnuConsultaClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuConsultaClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/contas1.png"))); // NOI18N
+        jMnuConsultaClientes.setText("Clientes");
+        jMnuConsultaClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConsultaClientesActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMnuConsultaClientes);
+
+        jMnuConsultaVendas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuConsultaVendas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dineiro.png"))); // NOI18N
+        jMnuConsultaVendas.setText("Vendas");
+        jMnuConsultaVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConsultaVendasActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMnuConsultaVendas);
+
+        jMnuConsultaLivros.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuConsultaLivros.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nota.png"))); // NOI18N
+        jMnuConsultaLivros.setText("Livros");
+        jMnuConsultaLivros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConsultaLivrosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMnuConsultaLivros);
+
+        jMnuConsultaAutores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuConsultaAutores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario1.png"))); // NOI18N
+        jMnuConsultaAutores.setText("Autores");
+        jMnuConsultaAutores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuConsultaAutoresActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMnuConsultaAutores);
+
+        jMenuBar1.add(jMenu3);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(243, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMnuArtistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuArtistaActionPerformed
-      JDlgAutorNcc jDlgArtistaNcc = new JDlgAutorNcc(null, true);
-      jDlgArtistaNcc.setVisible(true);
+        JDlgAutorNcc jDlgArtistaNcc = new JDlgAutorNcc(null, true);
+        jDlgArtistaNcc.setVisible(true);
     }//GEN-LAST:event_jMnuArtistaActionPerformed
 
     private void jMnuLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuLivroActionPerformed
@@ -183,6 +299,51 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     private void jMnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSairActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMnuSairActionPerformed
+
+    private void jMnuConsultaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaClientesActionPerformed
+        JDlgVendasPesquisar jDlgVendasPesquisar = new JDlgVendasPesquisar(null, true);
+        jDlgVendasPesquisar.setVisible(true);
+    }//GEN-LAST:event_jMnuConsultaClientesActionPerformed
+
+    private void jMnuConsultaVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaVendasActionPerformed
+        JDlgVendasNcc jDlgVendasNcc = new JDlgVendasNcc(null, true);
+        jDlgVendasNcc.setVisible(true);
+    }//GEN-LAST:event_jMnuConsultaVendasActionPerformed
+
+    private void jBtnClienteCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClienteCadastrarActionPerformed
+        JDlgClienteNcc jDlgClienteNcc = new JDlgClienteNcc(null, true);
+        jDlgClienteNcc.setVisible(true);
+    }//GEN-LAST:event_jBtnClienteCadastrarActionPerformed
+
+    private void jMnuConsultaLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaLivrosActionPerformed
+        JDlgLivroPesquisarNcc jDlgLivroPesquisarNcc = new JDlgLivroPesquisarNcc(null, true);
+        jDlgLivroPesquisarNcc.setVisible(true);
+    }//GEN-LAST:event_jMnuConsultaLivrosActionPerformed
+
+    private void jMnuConsultaAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaAutoresActionPerformed
+        JDlgAutorPesquisar jDlgAutorPesquisar = new JDlgAutorPesquisar(null, true);
+        jDlgAutorPesquisar.setVisible(true);
+    }//GEN-LAST:event_jMnuConsultaAutoresActionPerformed
+
+    private void jBtnLivroCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLivroCadastrarActionPerformed
+        JDlgLivroNcc jDlgLivroNcc = new JDlgLivroNcc(null, true);
+        jDlgLivroNcc.setVisible(true);
+    }//GEN-LAST:event_jBtnLivroCadastrarActionPerformed
+
+    private void jBtnVendasMovimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVendasMovimentoActionPerformed
+        JDlgVendasNcc jDlgVendasNcc = new JDlgVendasNcc(null, true);
+        jDlgVendasNcc.setVisible(true);
+    }//GEN-LAST:event_jBtnVendasMovimentoActionPerformed
+
+    private void jBtnClientesConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClientesConsultarActionPerformed
+        JDlgVendasPesquisar jDlgVendasPesquisar = new JDlgVendasPesquisar(null, true);
+        jDlgVendasPesquisar.setVisible(true);
+    }//GEN-LAST:event_jBtnClientesConsultarActionPerformed
+
+    private void jBtnLivroConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLivroConsultarActionPerformed
+        JDlgLivroPesquisarNcc jDlgLivroPesquisarNcc = new JDlgLivroPesquisarNcc(null, true);
+        jDlgLivroPesquisarNcc.setVisible(true);
+    }//GEN-LAST:event_jBtnLivroConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,16 +382,27 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnClienteCadastrar;
+    private javax.swing.JButton jBtnClientesConsultar;
+    private javax.swing.JButton jBtnLivroCadastrar;
+    private javax.swing.JButton jBtnLivroConsultar;
+    private javax.swing.JButton jBtnVendasMovimento;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMnuArtista;
     private javax.swing.JMenuItem jMnuCliente;
+    private javax.swing.JMenuItem jMnuConsultaAutores;
+    private javax.swing.JMenuItem jMnuConsultaClientes;
+    private javax.swing.JMenuItem jMnuConsultaLivros;
+    private javax.swing.JMenuItem jMnuConsultaVendas;
     private javax.swing.JMenuItem jMnuLivro;
     private javax.swing.JMenuItem jMnuSair;
     private javax.swing.JMenuItem jMnuUsuario;
     private javax.swing.JMenuItem jMnuVendas;
     private javax.swing.JMenuItem jMnuVendedor;
+    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }

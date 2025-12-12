@@ -405,10 +405,8 @@ public class JDlgVendasNcc extends javax.swing.JDialog {
 
     private void jBtnIncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluirProdActionPerformed
         JDlgVendasProdutos jDlgVendasProdutos = new JDlgVendasProdutos(null, true);
+        jDlgVendasProdutos.setTelaAnterior(this, null);
         jDlgVendasProdutos.setVisible(true);
-        LivroDAO livroDAO = new LivroDAO();
-        LivroNcc livroNcc = new LivroNcc();
-        livroDAO.insert(livroNcc);
     }//GEN-LAST:event_jBtnIncluirProdActionPerformed
 
     private void jBtnAlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarProdActionPerformed

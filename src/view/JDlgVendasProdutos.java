@@ -36,9 +36,9 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
             jCboLivro.addItem((LivroNcc) object);
         }
         Util.habilitar(false, jTxtValorUn, jTxtTotal);
-        
+
     }
-    
+
     public void setTelaAnterior(JDlgVendasNcc jDlgVendasNcc, VendasProdutosNcc vendasProdutosNcc) {
         this.jDlgVendasNcc = jDlgVendasNcc;
         if (vendasProdutosNcc != null) {
@@ -48,9 +48,9 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
         } else {
             incluir = true;
         }
-    
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,7 +187,7 @@ public class JDlgVendasProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
-vendasProdutosNcc = new VendasProdutosNcc();
+        vendasProdutosNcc = new VendasProdutosNcc();
         vendasProdutosNcc.setLivroNcc((LivroNcc) jCboLivro.getSelectedItem());
         vendasProdutosNcc.setQuantidadeNcc(Util.strToInt(jTxtQtd.getText()));
         vendasProdutosNcc.setValorUnitarioNcc(Util.strToDouble(jTxtValorUn.getText()));
@@ -202,29 +202,26 @@ vendasProdutosNcc = new VendasProdutosNcc();
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     private void jTxtQtdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtQtdKeyReleased
-        if (!jTxtQtd.getText().equals("")) {
+        if (!jTxtQtd.getText().isEmpty() == false ) {
+            LivroNcc livroNcc = (LivroNcc) jCboLivro.getSelectedItem();
             int quant = Util.strToInt(jTxtQtd.getText());
-            double unitario = Util.strToDouble(jTxtValorUn.getText());
-            jTxtTotal.setText(Util.doubleToStr(quant * unitario));
-            jRbPix.setSelected(true);
-        } else if(jRbCredito.isSelected()){
+            jTxtTotal.setText(Util.doubleToStr(quant * livroNcc.getValorUnNcc()));
+
+        } else if (jRbCredito.isSelected()) {
             int quant = Util.strToInt(jTxtQtd.getText());
             double unitario = Util.strToDouble(jTxtValorUn.getText());
             jTxtTotal.setText(Util.doubleToStr(quant * unitario * 0.15));
-        }else {
+        } else {
             jTxtTotal.setText("");
         }
 
     }//GEN-LAST:event_jTxtQtdKeyReleased
 
     private void jCboLivroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboLivroActionPerformed
-if (jTxtQtd.getText().isEmpty() == false) {
-            LivroNcc livroNcc = (LivroNcc) jCboLivro.getSelectedItem();
-            int quant = Util.strToInt(jTxtQtd.getText());
-            jTxtTotal.setText(Util.doubleToStr(quant * livroNcc.getValorUnNcc()));
-        } else {
-            Util.limpar(jTxtTotal);
-        }
+       LivroNcc livroNcc = (LivroNcc) jCboLivro.getSelectedItem();
+        jTxtValorUn.setText(Util.doubleToStr(livroNcc.getValorUnNcc()));
+        int quant = Util.strToInt(jTxtQtd.getText());
+        jTxtTotal.setText(Util.doubleToStr( quant * livroNcc.getValorUnNcc()));
     }//GEN-LAST:event_jCboLivroActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
