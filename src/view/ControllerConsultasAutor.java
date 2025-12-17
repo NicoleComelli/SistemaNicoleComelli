@@ -4,6 +4,7 @@
  */
 package view;
 
+import bean.AutorNcc;
 import bean.LivroNcc;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -12,18 +13,18 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author u03808019140
  */
-public class ControllerConsultasLivroNcc extends AbstractTableModel {
+public class ControllerConsultasAutor extends AbstractTableModel {
 
-    private List lstConsultasLivro;
+    private List lstConsultasAutor;
 
-    public void setList(List lstConsultasLivro) {
-        this.lstConsultasLivro = lstConsultasLivro;
+    public void setList(List lstConsultasAutor) {
+        this.lstConsultasAutor = lstConsultasAutor;
         this.fireTableDataChanged();
     }
 
     @Override
     public int getRowCount() {
-        return lstConsultasLivro.size();
+        return lstConsultasAutor.size();
 
     }
 
@@ -34,11 +35,11 @@ public class ControllerConsultasLivroNcc extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        LivroNcc livroNcc  = (LivroNcc) lstConsultasLivro.get(rowIndex);
+        AutorNcc autorNcc  = (AutorNcc) lstConsultasAutor.get(rowIndex);
         if (columnIndex == 0) {
-            return livroNcc.getTituloNcc();
+            return autorNcc.getNomeNcc();
         } else if (columnIndex == 1) {
-            return livroNcc.getDataPublicacaoNcc();
+            return autorNcc.getPseudonimoNcc();
         }
         return "";
     }
@@ -48,7 +49,7 @@ public class ControllerConsultasLivroNcc extends AbstractTableModel {
         if (columnIndex == 0) {
             return "Nome";
         } else if (columnIndex == 1) {
-            return "Apelido";
+            return "Pseudonimo";
         }
         return "";
     }

@@ -15,9 +15,14 @@ import dao.LivroDAO;
 import dao.VendasDAO;
 import dao.VendasProdutosDAO;
 import dao.VendedorDAO;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -41,8 +46,8 @@ public class JDlgVendasNcc extends javax.swing.JDialog {
         setTitle("Tela de vendas");
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtTotal, jTblVendas, jFmtData,
-                jCboCliente, jCboVendedor, jBtnAlterar, jBtnAlterarProd,
-                jBtnExcluir, jBtnExcluirProd, jBtnIncluir, jBtnIncluirProd, jBtnAlterarProd, jBtnExcluirProd, jBtnPesquisar);
+                jCboCliente, jCboVendedor, jBtnAlterarProd, jBtnExcluirProd, jBtnIncluirProd, 
+                jBtnAlterarProd, jBtnExcluirProd, jBtnCancelar, jBtnConfirmar);
 
         ClienteDAO clienteDAO = new ClienteDAO();
         List lista = (List) clienteDAO.listAll();
@@ -58,6 +63,13 @@ public class JDlgVendasNcc extends javax.swing.JDialog {
         controllerVendasProdutosNcc = new ControllerVendasProdutosNcc();
         controllerVendasProdutosNcc.setLista(new ArrayList());
         jTblVendas.setModel(controllerVendasProdutosNcc);
+        
+        try {
+            MaskFormatter data = new MaskFormatter("##/##/####");
+            jFmtData.setFormatterFactory(new DefaultFormatterFactory(data));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public JTable getjTblVendas() {

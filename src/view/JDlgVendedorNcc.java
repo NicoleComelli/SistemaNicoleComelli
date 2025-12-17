@@ -7,6 +7,11 @@ package view;
 
 import bean.VendedorNcc;
 import dao.VendedorDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -29,6 +34,25 @@ public class JDlgVendedorNcc extends javax.swing.JDialog {
                 jBtnConfirmar, jBtnCancelar);
         Util.habilitar(true, jBtnIncluir, jBtnAlterar, jBtnExcluir,
                 jBtnPesquisar);
+        
+        try {
+            MaskFormatter data = new MaskFormatter("##/##/####");
+            jFmtDataNascimento.setFormatterFactory(new DefaultFormatterFactory(data));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            MaskFormatter tel = new MaskFormatter("## #####-####");
+            jFmtTelefone.setFormatterFactory(new DefaultFormatterFactory(tel));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            MaskFormatter cpf = new MaskFormatter("###.###.###-##");
+            jFmtCpf.setFormatterFactory(new DefaultFormatterFactory(cpf));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public VendedorNcc viewBean() {

@@ -38,7 +38,7 @@
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="jTxtDataPublicacao" min="-2" pref="180" max="-2" attributes="0"/>
+                              <Component id="jTxtAutor" min="-2" pref="180" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jBtnConsultar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -65,7 +65,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTxtTitulo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTxtDataPublicacao" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTxtAutor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jBtnConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -97,6 +97,7 @@
             </Property>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseEntered"/>
           </Events>
         </Component>
@@ -104,12 +105,15 @@
     </Container>
     <Component class="javax.swing.JTextField" name="jTxtTitulo">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTxtDataPublicacao">
+    <Component class="javax.swing.JTextField" name="jTxtAutor">
     </Component>
     <Component class="javax.swing.JButton" name="jBtnConsultar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consultar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnConsultarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
@@ -118,13 +122,16 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Data de publica&#xe7;&#xe3;o"/>
+        <Property name="text" type="java.lang.String" value="Autor"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jBtnOK">
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnOKActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

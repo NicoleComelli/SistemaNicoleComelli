@@ -49,6 +49,34 @@ public class LivroDAO extends AbstractDAO{
         session.getTransaction().commit();
         return lista;
     }
+    
+      public Object listTitulo(String tituloNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LivroNcc.class);
+        criteria.add(Restrictions.like("tituloNcc", "%"+ tituloNcc+" %"));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+    
+    public Object listAutor(String autorNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LivroNcc.class);
+        criteria.add(Restrictions.like("autorNcc", "%"+ autorNcc+" %"));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+
+    public Object listTituloAutor(String tituloNcc, String autorNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(LivroNcc.class);
+        criteria.add(Restrictions.like("tituloNcc", "%"+ tituloNcc+" %"));
+        criteria.add(Restrictions.like("autorNcc", "%"+ autorNcc+" %"));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
 
     @Override
     public Object listAll() {

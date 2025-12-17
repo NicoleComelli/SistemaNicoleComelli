@@ -101,12 +101,13 @@ public class JDlgAutorPesquisar extends javax.swing.JDialog {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
         if (jTblPesquisar.getSelectedRow() == -1) {
-            Util.msg("Nenhum registro foi selecionada. Favor selecionar um registro.");
+            Util.msg("Nenhum registro foi selecionado. Favor selecionar um registro.");
         } else {
             AutorNcc autorNcc = controllerAutorNcc.getBean(jTblPesquisar.getSelectedRow());
             jDlgAutorNcc.beanView(autorNcc);
-            this.setVisible(false);
+            setVisible(false);
         }
+        
     }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**

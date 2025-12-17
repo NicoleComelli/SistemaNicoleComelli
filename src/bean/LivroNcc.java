@@ -139,6 +139,10 @@ public class LivroNcc  implements java.io.Serializable {
     public void setPagamentoNcc(int pagamentoNcc) {
         this.pagamentoNcc = pagamentoNcc;
     }
+     @Override
+    public String toString() {
+        return this.idLivroNcc + " - " + this.tituloNcc;
+    }
     
     public boolean equals(Object object) {
         if (object instanceof LivroNcc) {

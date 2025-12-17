@@ -5,11 +5,17 @@
  */
 package view;
 
+import dao.LivroDAO;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author u03808019140
  */
 public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
+
+    ControllerConsultasLivroNcc controllerConsultasLivroNcc;
 
     /**
      * Creates new form JDlgConsultaLivroNcc
@@ -17,6 +23,12 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
     public JDlgConsultaLivroNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("consultar livro");
+        controllerConsultasLivroNcc = new ControllerConsultasLivroNcc();
+        LivroDAO livroDAO = new LivroDAO();
+        List lista = new ArrayList();
+        controllerConsultasLivroNcc.setList(lista);
+        jTable1.setModel(controllerConsultasLivroNcc);
     }
 
     /**
@@ -31,7 +43,7 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTxtTitulo = new javax.swing.JTextField();
-        jTxtDataPublicacao = new javax.swing.JTextField();
+        jTxtAutor = new javax.swing.JTextField();
         jBtnConsultar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -51,6 +63,9 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jTable1MouseEntered(evt);
             }
@@ -58,12 +73,22 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         jBtnConsultar.setText("Consultar");
+        jBtnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Titulo");
 
-        jLabel2.setText("Data de publicação");
+        jLabel2.setText("Autor");
 
         jBtnOK.setText("OK");
+        jBtnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnOKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,7 +107,7 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTxtDataPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTxtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jBtnConsultar))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -101,7 +126,7 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtDataPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBtnConsultar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,6 +141,33 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseEntered
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        if (evt.getClickCount() == 2) {
+            jBtnOKActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jBtnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultarActionPerformed
+LivroDAO livroDAO = new LivroDAO();
+        List lista;
+        if ((jTxtTitulo.getText().isEmpty() == false) && (jTxtAutor.getText().isEmpty() == false)) {
+            lista = (List) livroDAO.listTituloAutor(jTxtTitulo.getText(), jTxtAutor.getText());
+        } else if (jTxtAutor.getText().isEmpty() == false) {
+            lista = (List) livroDAO.listAutor(jTxtAutor.getText());
+        } else if (jTxtTitulo.getText().isEmpty() == false) {
+            lista = (List) livroDAO.listTitulo(jTxtTitulo.getText());
+        } else {
+            lista = (List) livroDAO.listAll();
+        }
+        controllerConsultasLivroNcc.setList(lista);
+
+    }//GEN-LAST:event_jBtnConsultarActionPerformed
+
+    private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
+        setVisible(false);
+      
+    }//GEN-LAST:event_jBtnOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,7 +218,7 @@ public class JDlgConsultaLivroNcc extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTxtDataPublicacao;
+    private javax.swing.JTextField jTxtAutor;
     private javax.swing.JTextField jTxtTitulo;
     // End of variables declaration//GEN-END:variables
 }

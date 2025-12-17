@@ -6,6 +6,7 @@
 package view;
 
 import dao.VendasDAO;
+import java.util.ArrayList;
 import java.util.List;
 import tools.Util;
 
@@ -22,6 +23,12 @@ public class JDlgConsultaVendasNcc extends javax.swing.JDialog {
     public JDlgConsultaVendasNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Consultar vendas");
+        controllerConsultasVendasNcc = new ControllerConsultasVendasNcc();
+        VendasDAO vendasDAO = new VendasDAO();
+        List lista = new ArrayList();
+        controllerConsultasVendasNcc.setList(lista);
+        jTable1.setModel(controllerConsultasVendasNcc);
     }
 
     /**

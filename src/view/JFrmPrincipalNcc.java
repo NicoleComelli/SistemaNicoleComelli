@@ -301,13 +301,13 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     }//GEN-LAST:event_jMnuSairActionPerformed
 
     private void jMnuConsultaClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaClientesActionPerformed
-        JDlgVendasPesquisar jDlgVendasPesquisar = new JDlgVendasPesquisar(null, true);
-        jDlgVendasPesquisar.setVisible(true);
+        JDlgConsultaClienteNcc jDlgConsultaClienteNcc = new JDlgConsultaClienteNcc(null, true);
+        jDlgConsultaClienteNcc.setVisible(true);
     }//GEN-LAST:event_jMnuConsultaClientesActionPerformed
 
     private void jMnuConsultaVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaVendasActionPerformed
-        JDlgVendasNcc jDlgVendasNcc = new JDlgVendasNcc(null, true);
-        jDlgVendasNcc.setVisible(true);
+        JDlgConsultaVendasNcc jDlgConsultaVendasNcc = new JDlgConsultaVendasNcc(null, true);
+        jDlgConsultaVendasNcc.setVisible(true);
     }//GEN-LAST:event_jMnuConsultaVendasActionPerformed
 
     private void jBtnClienteCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClienteCadastrarActionPerformed
@@ -316,13 +316,13 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnClienteCadastrarActionPerformed
 
     private void jMnuConsultaLivrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaLivrosActionPerformed
-        JDlgLivroPesquisarNcc jDlgLivroPesquisarNcc = new JDlgLivroPesquisarNcc(null, true);
-        jDlgLivroPesquisarNcc.setVisible(true);
+        JDlgConsultaLivroNcc jDlgConsultaLivroNcc = new JDlgConsultaLivroNcc(null, true);
+        jDlgConsultaLivroNcc.setVisible(true);
     }//GEN-LAST:event_jMnuConsultaLivrosActionPerformed
 
     private void jMnuConsultaAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuConsultaAutoresActionPerformed
-        JDlgAutorPesquisar jDlgAutorPesquisar = new JDlgAutorPesquisar(null, true);
-        jDlgAutorPesquisar.setVisible(true);
+        JDlgConsultaAutorNcc jDlgConsultaAutorNcc = new JDlgConsultaAutorNcc(null, true);
+        jDlgConsultaAutorNcc.setVisible(true);
     }//GEN-LAST:event_jMnuConsultaAutoresActionPerformed
 
     private void jBtnLivroCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLivroCadastrarActionPerformed
@@ -336,13 +336,13 @@ public class JFrmPrincipalNcc extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnVendasMovimentoActionPerformed
 
     private void jBtnClientesConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnClientesConsultarActionPerformed
-        JDlgVendasPesquisar jDlgVendasPesquisar = new JDlgVendasPesquisar(null, true);
-        jDlgVendasPesquisar.setVisible(true);
+        JDlgConsultaClienteNcc jDlgConsultaClienteNcc = new JDlgConsultaClienteNcc(null, true);
+        jDlgConsultaClienteNcc.setVisible(true);
     }//GEN-LAST:event_jBtnClientesConsultarActionPerformed
 
     private void jBtnLivroConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLivroConsultarActionPerformed
-        JDlgLivroPesquisarNcc jDlgLivroPesquisarNcc = new JDlgLivroPesquisarNcc(null, true);
-        jDlgLivroPesquisarNcc.setVisible(true);
+        JDlgConsultaLivroNcc jDlgConsultaLivroNcc = new JDlgConsultaLivroNcc(null, true);
+        jDlgConsultaLivroNcc.setVisible(true);
     }//GEN-LAST:event_jBtnLivroConsultarActionPerformed
 
     /**

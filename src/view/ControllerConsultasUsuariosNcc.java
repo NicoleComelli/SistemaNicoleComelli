@@ -5,7 +5,6 @@
 package view;
 
 import bean.UsuariosNcc;
-import bean.VendedorNcc;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

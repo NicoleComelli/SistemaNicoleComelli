@@ -6,6 +6,11 @@ package view;
 
 import bean.AutorNcc;
 import dao.AutorDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -15,8 +20,6 @@ import tools.Util;
 public class JDlgAutorNcc extends javax.swing.JDialog {
 
     boolean incluir;
-    AutorDAO autorDAO;
-    AutorNcc autorNcc;
 
     /**
      * Creates new form JDlgAutor
@@ -28,6 +31,13 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Util.habilitar(false, jTxtCodigo, jTxtNome, jTxtNacionalidade, jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail, jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+
+        try {
+            MaskFormatter data = new MaskFormatter("##/##/####");
+            jFmtDataDeNascimento.setFormatterFactory(new DefaultFormatterFactory(data));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -258,7 +268,8 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
 
     private void jBtnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterarActionPerformed
         this.incluir = false;
-        if (this.autorNcc == null) {
+        AutorNcc autorNcc = new AutorNcc();
+        if (autorNcc == null) {
             Util.msg("É necessário fazer uma consulta antes de alterar!");
         } else {
             Util.habilitar(true, jTxtCodigo, jTxtNome, jTxtNacionalidade,
@@ -269,7 +280,10 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnAlterarActionPerformed
 
     private void jBtnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluirActionPerformed
-        if (this.autorNcc == null) {
+        AutorNcc autorNcc = new AutorNcc();
+        AutorDAO autorDAO = new AutorDAO();
+        
+        if (autorNcc == null) {
             Util.msg("É necessario fazer uma consulta antes de excluir");
         } else {
             if (Util.perguntar("Deseja excluir?") == true) {
@@ -287,8 +301,13 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
     }//GEN-LAST:event_jBtnExcluirActionPerformed
 
     private void jBtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmarActionPerformed
+        AutorNcc autorNcc = new AutorNcc();
+        AutorDAO autorDAO = new AutorDAO();
         autorNcc = viewBean();
         autorDAO = new AutorDAO();
+        if(autorNcc == null){
+            Util.msg("Você deve preencher os campos para confirmar!");
+        }else{
         if (this.incluir == true) {
             autorDAO.insert(autorNcc);
         } else {
@@ -298,6 +317,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
                 jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
                 jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        }
     }//GEN-LAST:event_jBtnConfirmarActionPerformed
 
     private void jBtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCancelarActionPerformed
@@ -305,7 +325,7 @@ public class JDlgAutorNcc extends javax.swing.JDialog {
                 jTxtPseudonimo, jFmtDataDeNascimento, jFmtEmail,
                 jFmtDataDeObito, jBtnCancelar, jBtnConfirmar);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
-
+        Util.limpar(jTxtCodigo, jTxtNacionalidade, jTxtNome, jTxtPseudonimo, jFmtEmail, jFmtDataDeObito, jFmtDataDeNascimento);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed

@@ -6,6 +6,7 @@
 package view;
 
 import dao.UsuariosDAO;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,14 +14,21 @@ import java.util.List;
  * @author u03808019140
  */
 public class JDlgConsultaUsuarioNcc extends javax.swing.JDialog {
-
+    
     ControllerConsultasUsuariosNcc controllerConsultasUsuariosNcc;
+
     /**
      * Creates new form JDlgConsultaLivroNcc
      */
     public JDlgConsultaUsuarioNcc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setTitle("Consultar usuários");
+        controllerConsultasUsuariosNcc = new ControllerConsultasUsuariosNcc();
+        UsuariosDAO usuariosDAO = new UsuariosDAO();
+        List lista = new ArrayList();
+        controllerConsultasUsuariosNcc.setList(lista);
+        jTable1.setModel(controllerConsultasUsuariosNcc);
     }
 
     /**
@@ -128,7 +136,7 @@ public class JDlgConsultaUsuarioNcc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             jBtnOKActionPerformed(null);
         }
     }//GEN-LAST:event_jTable1MouseClicked

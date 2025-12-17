@@ -6,6 +6,11 @@ package view;
 
 import bean.LivroNcc;
 import dao.LivroDAO;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
 import tools.Util;
 
 /**
@@ -30,6 +35,13 @@ public class JDlgLivroNcc extends javax.swing.JDialog {
                 jTxtNumeroDePaginas, jTxtTitulo, jFmtDataDeCadastro,
                 jFmtDataDePublicacao, jBtnCancelar, jBtnConfirmar, jTxtValorUn);
         Util.habilitar(true, jBtnAlterar, jBtnExcluir, jBtnIncluir, jBtnPesquisar);
+        try {
+            MaskFormatter data = new MaskFormatter("##/##/####");
+            jFmtDataDeCadastro.setFormatterFactory(new DefaultFormatterFactory(data));
+            jFmtDataDePublicacao.setFormatterFactory(new DefaultFormatterFactory(data));
+        } catch (ParseException ex) {
+            Logger.getLogger(JDlgVendedorNcc.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public LivroNcc viewBean() {
