@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JDlgConsultaVendedorNcc.java</file>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JFrmPrincipalNcc.java</file>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JDlgConsultaClienteNcc.java</file>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JDlgConsultaLivroNcc.java</file>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JDlgConsultaVendasNcc.java</file>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JDlgConsultaUsuarioNcc.java</file>
-            <file>file:/C:/Users/u03808019140/Documents/SistemaNicoleComelli/src/view/JDlgConsultaAutorNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/JDlgVendasProdutos.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/bean/VendasNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/JDlgConsultaClienteNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/JDlgConsultaVendasNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/JDlgConsultaAutorNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/JDlgConsultaLivroNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/dao/VendasDAO.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/JDlgConsultaUsuarioNcc.java</file>
+            <file>file:/C:/Users/Nick/Documents/NetBeansProjects/SistemaNicoleComelli/src/view/ControllerConsultasVendasNcc.java</file>
         </group>
     </open-files>
 </project-private>

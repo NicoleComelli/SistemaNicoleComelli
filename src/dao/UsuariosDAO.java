@@ -50,6 +50,36 @@ public class UsuariosDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
+    
+    
+    public Object listNome(String nomeNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(UsuariosNcc.class);
+        criteria.add(Restrictions.like("nomeNcc", "%"+ nomeNcc +" %"));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+    
+    public Object listCpf(String cpfNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(UsuariosNcc.class);
+        criteria.add(Restrictions.like("cpfNcc", cpfNcc));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+
+    public Object listNomeCpf(String nomeNcc, String cpfNcc) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(UsuariosNcc.class);
+        criteria.add(Restrictions.like("nomeNcc", "%"+ nomeNcc +" %"));
+        criteria.add(Restrictions.like("cpfNcc", cpfNcc));
+        List lista = criteria.list();
+        session.getTransaction().commit();        
+        return lista;
+    }
+    
 
     @Override
     public Object listAll() {
